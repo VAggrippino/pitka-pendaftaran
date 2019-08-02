@@ -1,0 +1,848 @@
+<!--
+<header>
+  <h1 class="title">Persatuan Ibu Tunggal Karambunai (PITKA)</h1>
+  <h2 class="subtitle">Borang Keahlian</h2>
+</header>
+-->
+
+<form class="pitka-bp" action="#" method="post">
+	<ol>
+		<section class="bahagian">
+			<h3 class="section-title">Bahagian A: Maklumat Peribadi Ibu Tunggal</h3>
+			<li class="question">
+				<p>Maklumat peribadi:</p>
+				<ol>
+					<li>
+						<div class="field">
+							<label for="nama">Nama:</label>
+							<input type="text" class="nama" id="nama" name="nama">
+						</div>
+					</li>
+
+					<li>
+						<div class="field">
+							<label for="ic">Kad Pengenalan Baru:</label>
+							<input
+								type="text"
+								name="ic"id="ic"
+								pattern="\d{6}-\d\d-\d{4}"
+								placeholder="######-##-####"
+							>
+						</div>
+					</li>
+
+					<li>
+						<div class="field">
+							<label for="dob">Tarikh Lahir:</label>
+							<input type="date" name="dob" id="dob">
+						</div>
+						<div class="field">
+							<label for="birthplace">Tempat Lahir:</label>
+							<textarea name="birthplace" id="birthplace"></textarea>
+						</div>
+					</li>
+
+					<li>
+						<div class="field">
+							<label for="address">Alamat Kediaman:</label>
+							<textarea name="address" id="address" class="address"></textarea>
+						</div>
+					</li>
+
+					<li>
+						<div class="field">
+							<label for="workPhone">No. Telefon Pejabat:</label>
+							<input
+								type="tel"
+								name="workPhone"
+								id="workPhone"
+								pattern="\d{2,3}-\d+"
+								placeholder="###-#######"
+							>
+						</div>
+
+						<div class="field">
+							<label for="homePhone">No. Telefon Rumah:</label>
+							<input
+								type="tel"
+								name="homePhone"
+								id="homePhone"
+								pattern="\d{2,3}-\d+"
+								placeholder="###-#######"
+							>
+						</div>
+
+						<div class="field">
+							<label for="mobilePhone">No. Telefon Bimbit:</label>
+							<input
+								type="tel"
+								name="mobilePhone"
+								id="mobilePhone"
+								pattern="\d{2,3}-\d+"
+								placeholder="###-#######"
+							>
+						</div>
+					</li>
+				</ol>
+			</li>
+        
+			<li class="question">
+				<div class="field">
+					<label for="age">Umur:</label>
+					<select name="age" id="age">
+						<option>-- Sila Pilih Satu --</option>
+						<option value="18-20">18 tahun - 20 tahun</option>
+						<option value="21-30">21 tahun - 30 tahun</option>
+						<option value="31-40">31 tahun - 40 tahun</option>
+						<option value="41-50">41 tahun - 50 tahun</option>
+						<option value="51-60">51 tahun - 60 tahun</option>
+						<option value="61+">61 tahun dan ke atas</option>
+					</select>
+				</div>
+			</li>
+						
+			<li class="question">
+				<div class="field">
+					<label for="bangsa">Bangsa:</label>
+					<select name="bangsa" id="bangsa">
+						<option value="">-- Sila Pilih Satu --</option>
+						<option value="Melayu">Melayu</option>
+						<option value="Kadazan / Dusun">Kadazan / Dusun</option>
+						<option value="Cina">Cina</option>
+						<option value="India">India</option>
+						<option value="Other">Lain-lain (sila nyatakan)</option>
+					</select>
+					<input type="text" name="bangsa-other" id="bangsa-other" disabled>
+				</div>
+			</li>
+	
+			<li class="question">
+				<label for="agama">Agama:</label>
+				<select name="agama" id="agama">
+					<option value="">-- Sila Pilih Satu --</option>
+					<option value="Islam">Islam</option>
+					<option value="Kristian">Kristian</option>
+					<option value="Buddha">Buddha</option>
+					<option value="Hindu">Hindu</option>
+					<option value="Other">Lain-lain (sila nyatakan)</option>
+				</select>
+				<input type="text" name="agama-other" id="agama-other" disabled>
+			</li>
+							
+			<li class="question">
+				<p>Maklumat Pekerjaan:</p>
+				<ol>
+					<li>
+						<div class="field">
+							<label for="pekerjaan--jenis">
+								Jenis Pekerjaan
+								(Kerajaan / Badan Berkanun / Swasta):
+							</label>
+							<input type="text" name="pekerjaan--jenis" id="pekerjaan--jenis">
+						</div>
+					</li>
+									
+					<li>
+						<div class="field">
+							<label for="pekerjaan--jawatan">Jawatan:</label>
+							<input
+								type="text"
+								name="pekerjaan--jawatan"
+								id="pekerjaan--jawatan"
+							>
+						</div>
+					</li>
+					
+					<li>
+						<div class="field">
+							<label for="pekerjaan--organisasi-nama">Nama Organisasi:</label>
+							<input type="text" name="pekerjaan--organisasi-nama">
+						</div>
+					</li>
+		
+					<li>
+						<div class="field">
+							<label for="pekerjaan--organisasi-alamat">Alamat Organisasi:</label>
+							<textarea
+								name="pekerjaan--organisasi-alamat"
+								id="pekerjaan--organisasi-alamat"
+							></textarea>
+						</div>
+					</li>
+				</ol>
+			</li>
+        
+			<li class="question">
+				<label for="pendapatan">Tingkat Pendapatan:</label>
+				<select name="pendapatan" id="pendapatan">
+					<option value="">-- Sila Pilih Satu --</option>
+					<option value="<500">Kurang dari RM500</option>
+					<option value="501-750">RM501 - RM750</option>
+					<option value="751-800">RM750 - RM800</option>
+					<option value="801-1000">RM801 - RM1000</option>
+					<option value="1001-1200">RM1001 - RM1200</option>
+					<option value="1201-1400">RM1201 - RM1400</option>
+					<option value="1401-1600">RM1401 - RM1600</option>
+					<option value="1601-1800">RM1601 - RM1800</option>
+					<option value="1801-2000">RM1801 - RM2000</option>
+					<option value=">2000">Lebih dari RM2000</option>
+				</select>
+			</li>
+							
+			<li class="question">
+				<div class="field">
+					<label for="faktor">Faktor Menjadi Ibu Tunggal:</label>
+					<select name="faktor" id="faktor">
+						<option value="">-- Sila Pilih Satu --</option>
+						<option value="Kematian Suami">Kematian Suami</option>
+						<option value="Perceraian">Perceraian</option>
+						<option value="other">Lain-lain (sila nyatakan)</option>
+					</select>
+					<input type="text" name="faktor-other" disabled>
+				</div>
+			</li>
+
+			<li class="question">
+				<p>
+					Sila senaraikan aset yang dimiliki oleh ibu tunggal dan nyatakan status
+					aset tersebut sama ada ia milik sendiri ibu tunggal, disewa, atau
+					disumbangkan oleh pihak tertentu.
+				</p>
+
+				<table class="aset-table" id="aset-table">
+					<tr class="aset-table--heading">
+						<th>Aset Yang Dimiliki</th>
+						<th>Sendiri</th>
+						<th>Sewa</th>
+					</tr>
+					<tr class="item">
+						<td class="item--description">
+							<input
+								type="text"
+								class="item--description--field"
+								name="item--description--field-1"
+								id="item--description--field-1"
+							>
+						</td>
+						<td class="item--status">
+							<input
+								type="checkbox"
+								class="item--status--checkbox"
+								name="item--status--sendiri-1" id="item--status--sendiri-1"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="item--status--checkbox"
+								name="item--status--sewa-1" id="item--status--sewa-1"
+							>
+						</td>
+					</tr>
+
+					<tr class="item">
+						<td class="item--description">
+							<input
+								type="text"
+								class="item--description--field"
+								name="item--description--field-2"
+								id="item--description--field-2"
+							>
+						</td>
+						<td class="item--status">
+							<input
+								type="checkbox"
+								class="item--status--checkbox"
+								name="item--status--sendiri-2" id="item--status--sendiri-2"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="item--status--checkbox"
+								name="item--status--sewa-2" id="item--status--sewa-2"
+							>
+						</td>
+					</tr>
+
+					<tr class="item">
+						<td class="item--description">
+							<input
+								type="text"
+								class="item--description--field"
+								name="item--description--field-3"
+								id="item--description--field-3"
+							>
+						</td>
+						<td class="item--status">
+							<input
+								type="checkbox"
+								class="item--status--checkbox"
+								name="item--status--sendiri-3" id="item--status--sendiri-3"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="item--status--checkbox"
+								name="item--status--sewa-3" id="item--status--sewa-3"
+							>
+						</td>
+					</tr>
+
+					<tr class="item">
+						<td class="item--description">
+							<input
+								type="text"
+								class="item--description--field"
+								name="item--description--field-4"
+								id="item--description--field-4"
+							>
+						</td>
+						<td class="item--status">
+							<input
+								type="checkbox"
+								class="item--status--checkbox"
+								name="item--status--sendiri-4" id="item--status--sendiri-4"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="item--status--checkbox"
+								name="item--status--sewa-4" id="item--status--sewa-4"
+							>
+						</td>
+					</tr>
+				</table>
+			</li>
+
+			<li class="question">
+				<p>Maklumat Tanggungan:</p>
+				<ol>
+					<li>
+						<div class="field">
+							<label for="dependant-count">Bilangan Tanggungan:</label>
+							<input type="number" name="dependants--total-count" id="dependants--total-count">
+						</div>
+					</li>
+						
+					<li>
+						<div class="field">
+							<label for="dependant-school-count">Bilangan Anak Bersekolah:</label>
+							<input type="number" name="dependants--in-school-count" id="dependants--in-school-count">
+						</div>
+					</li>
+						
+					<li>
+						<div class="field">
+							<label for="dependant-count">Bilangan Anak Bekerja:</label>
+							<input
+								type="number"
+								name="dependents--children-working-count"
+								id="dependents--children-working-count"
+							>
+						</div>
+					</li>
+			
+					<li>
+						<div class="field">
+							<label for="dependant-count">Pekerjaan Anak:</label>
+							<input
+								type="text"
+								name="dependants--children-work"
+								id="dependants--children-work"
+							>
+						</div>
+					</li>
+            
+					<li>
+						<div class="field">
+							<label for="dependant-count">Bilangan Anak Mengganggur:</label>
+							<input type="number" name="dependents--unemployed-count" id="dependents--unemployed-count">
+						</div>
+					</li>
+				</ol>
+			</li>
+		</section>
+
+		<section class="bahagian">
+			<h3 class="section-title">Bahagian B: Klasifikasi Permasalahan Ibu Tunggal</h3>
+			<li class="question">
+				<p>
+					Sila nyatakan bentuk masalah yang dihadapi dan tandakan sama ada
+					masalah itu adalah masalah anda atou tanggungan anda.
+				</p>
+				<table id="masalah-table">
+					<tr class="masalah-table--heading">
+						<th>Bentuk Masalah</th>
+						<th>Diri</th>
+						<th>Tanggungan</th>
+					</tr>
+					<tr class="masalah">
+						<td class="masalah--description">
+							<input
+								type="text"
+								class="masalah--description--field"
+								name="masalah--description--field-1"
+								id="masalah--description--field-1"
+							>
+						</td>
+						<td class="masalah--focus">
+							<input
+								type="checkbox"
+								class="masalah--focus--checkbox"
+								name="masalah--focus--diri-1" id="masalah--focus--diri-1"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="masalah--focus--checkbox"
+								name="masalah--focus--tanggungan-1"
+								id="masalah--focus--tanggungan-1"
+							>
+						</td>
+					</tr>
+					<tr class="masalah">
+						<td class="masalah--description">
+							<input
+								type="text"
+								class="masalah--description--field"
+								name="masalah--description--field-2"
+								id="masalah--description--field-2"
+							>
+						</td>
+						<td class="masalah--focus">
+							<input
+								type="checkbox"
+								class="masalah--focus--checkbox"
+								name="masalah--focus--diri-2" id="masalah--focus--diri-2"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="masalah--focus--checkbox"
+								name="masalah--focus--tanggungan-2"
+								id="masalah--focus--tanggungan-2"
+							>
+						</td>
+					</tr>
+					<tr class="masalah">
+						<td class="masalah--description">
+							<input
+								type="text"
+								class="masalah--description--field"
+								name="masalah--description--field-3"
+								id="masalah--description--field-3"
+							>
+						</td>
+						<td class="masalah--focus">
+							<input
+								type="checkbox"
+								class="masalah--focus--checkbox"
+								name="masalah--focus--diri-3" id="masalah--focus--diri-3"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="masalah--focus--checkbox"
+								name="masalah--focus--tanggungan-3"
+								id="masalah--focus--tanggungan-3"
+							>
+						</td>
+					</tr>
+					<tr class="masalah">
+						<td class="masalah--description">
+							<input
+								type="text"
+								class="masalah--description--field"
+								name="masalah--description--field-4"
+								id="masalah--description--field-4"
+							>
+						</td>
+						<td class="masalah--focus">
+							<input
+								type="checkbox"
+								class="masalah--focus--checkbox"
+								name="masalah--focus--diri-4" id="masalah--focus--diri-4"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="masalah--focus--checkbox"
+								name="masalah--focus--tanggungan-4"
+								id="masalah--focus--tanggungan-4"
+							>
+						</td>
+					</tr>
+				</table>
+			</li>
+		</section>
+
+		<section class="bahagian">
+			<h3 class="section-title">Bahagian C: Klasifikasi Keperluan Ibu Tunggal</h3>
+			<li class="question">
+				<p>
+					Sila nyatakan jenis keperluan yang dikehendaki sama ada ibu tunggal
+					atau tanggungan mereka.
+				</p>
+				<table id="keperluan-table">
+					<tr class="keperluan-table--heading">
+						<th>Jenis Keperluan</th>
+						<th>Diri</th>
+						<th>Tanggungan</th>
+					</tr>
+					<tr class="keperluan">
+						<td class="keperluan--description">
+							<input
+								type="text"
+								class="keperluan--description--field"
+								name="keperluan--description--field-1"
+								id="keperluan--description--field-1"
+							>
+						</td>
+						<td class="keperluan--focus">
+							<input
+								type="checkbox"
+								class="keperluan--focus--checkbox"
+								name="keperluan--focus--diri-1" id="keperluan--focus--diri-1"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="keperluan--focus--checkbox"
+								name="keperluan--focus--tanggungan-1"
+								id="keperluan--focus--tanggungan-1"
+							>
+						</td>
+					</tr>
+					<tr class="keperluan">
+						<td class="keperluan--description">
+							<input
+								type="text"
+								class="keperluan--description--field"
+								name="keperluan--description--field-2"
+								id="keperluan--description--field-2"
+							>
+						</td>
+						<td class="keperluan--focus">
+							<input
+								type="checkbox"
+								class="keperluan--focus--checkbox"
+								name="keperluan--focus--diri-2" id="keperluan--focus--diri-2"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="keperluan--focus--checkbox"
+								name="keperluan--focus--tanggungan-2"
+								id="keperluan--focus--tanggungan-2"
+							>
+						</td>
+					</tr>
+					<tr class="keperluan">
+						<td class="keperluan--description">
+							<input
+								type="text"
+								class="keperluan--description--field"
+								name="keperluan--description--field-3"
+								id="keperluan--description--field-3"
+							>
+						</td>
+						<td class="keperluan--focus">
+							<input
+								type="checkbox"
+								class="keperluan--focus--checkbox"
+								name="keperluan--focus--diri-3"
+								id="keperluan--focus--diri-3"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="keperluan--focus--checkbox"
+								name="keperluan--focus--tanggungan-3"
+								id="keperluan--focus--tanggungan-3"
+							>
+						</td>
+					</tr>
+					<tr class="keperluan">
+						<td class="keperluan--description">
+							<input
+								type="text"
+								class="keperluan--description--field"
+								name="keperluan--description--field-4"
+								id="keperluan--description--field-4"
+							>
+						</td>
+						<td class="keperluan--focus">
+							<input
+								type="checkbox"
+								class="keperluan--focus--checkbox"
+								name="keperluan--focus--diri-4" id="keperluan--focus--diri-4"
+							>
+						</td>
+						<td>
+							<input
+								type="checkbox"
+								class="keperluan--focus--checkbox"
+								name="keperluan--focus--tanggungan-4"
+								id="keperluan--focus--tanggungan-4"
+							>
+						</td>
+					</tr>
+				</table>
+			</li>
+		</section>
+		<section class="bahagian">
+			<h3 class="section-title">Bahagian D: Maklumat Bantuan Yang Diterima</h3>
+			<p class="section-description">
+				Sila nyatakan jenis bantuan yang telah diberikan kepada ibu tunggal atau
+				tanggungan mereka dan nyatakan agensi yang telah memberi sumbangan.
+			</p>
+			<li class="question">
+				<table id="bantuan-table">
+					<tr class="bantuan-table--heading">
+						<th>Jenis Bantuan</th>
+						<th>Agency Yang Menyumbangkan</th>
+					</tr>
+					<tr class="bantuan">
+						<td class="bantuan--description">
+							<input
+								type="text"
+								class="bantuan--description--field"
+								name="bantuan--description--field-1"
+								id="bantuan--description--field-1"
+							>
+						</td>
+						<td class="bantuan--agency">
+							<input
+								type="text"
+								class="bantuan--agency--field"
+								name="bantuan--agency--field-1"
+								id="bantuan--agency--field-1"
+							>
+						</td>
+					</tr>
+					<tr class="bantuan">
+						<td class="bantuan--description">
+							<input
+								type="text"
+								class="bantuan--description--field"
+								name="bantuan--description--field-2"
+								id="bantuan--description--field-2"
+							>
+						</td>
+						<td class="bantuan--agency">
+							<input
+								type="text"
+								class="bantuan--agency--field"
+								name="bantuan--agency--field-2"
+								id="bantuan--agency--field-2"
+							>
+						</td>
+					</tr>
+					<tr class="bantuan">
+						<td class="bantuan--description">
+							<input
+								type="text"
+								class="bantuan--description--field"
+								name="bantuan--description--field-3"
+								id="bantuan--description--field-3"
+							>
+						</td>
+						<td class="bantuan--agency">
+							<input
+								type="text"
+								class="bantuan--agency--field"
+								name="bantuan--agency--field-3"
+								id="bantuan--agency--field-3"
+							>
+						</td>
+					</tr>
+					<tr class="bantuan">
+						<td class="bantuan--description">
+							<input
+								type="text"
+								class="bantuan--description--field"
+								name="bantuan--description--field-4"
+								id="bantuan--description--field-4"
+							>
+						</td>
+						<td class="bantuan--agency">
+							<input
+								type="text"
+								class="bantuan--agency--field"
+								name="bantuan--agency--field-4"
+								id="bantuan--agency--field-4"
+							>
+						</td>
+					</tr>
+				</table>
+			</li>
+		</section>
+		<section class="bahagian">
+			<h3 class="section-title">Bahagian E: Maklumat Program Ibu Tunggal Yang Telah Dihadiri</h3>
+			<li class="question">
+				<p>
+					Sila isikan nama program dan nama penganjur yang telah dilaksanakan
+					bagi ibu tunggal.
+				</p>
+				<table id="program-table">
+					<tr class="program-table--heading">
+						<th>Nama Program</th>
+						<th>Nama Penganjur</th>
+					</tr>
+					<tr class="program">
+						<td class="program--description">
+							<input
+								type="text"
+								class="program--description--field"
+								name="program--description--field-1"
+								id="program--description--field-1"
+							>
+						</td>
+						<td class="penganjur">
+							<input
+								type="text"
+								class="penganjur--field"
+								name="penganjur--field-1"
+								id="penganjur--field-1"
+							>
+						</td>
+					</tr>
+					<tr class="program">
+						<td class="program--description">
+							<input
+								type="text"
+								class="program--description--field"
+								name="program--description--field-2"
+								id="program--description--field-2"
+							>
+						</td>
+						<td class="penganjur">
+							<input
+								type="text"
+								class="penganjur--field"
+								name="penganjur--field-2"
+								id="penganjur--field-2"
+							>
+						</td>
+					</tr>
+					<tr class="program">
+						<td class="program--description">
+							<input
+								type="text"
+								class="program--description--field"
+								name="program--description--field-3"
+								id="program--description--field-3"
+							>
+						</td>
+						<td class="penganjur">
+							<input
+								type="text"
+								class="penganjur--field"
+								name="penganjur--field-3"
+								id="penganjur--field-3"
+							>
+						</td>
+					</tr>
+					<tr class="program">
+						<td class="program--description">
+							<input
+								type="text"
+								class="program--description--field"
+								name="program--description--field-4"
+								id="program--description--field-4"
+							>
+						</td>
+						<td class="penganjur">
+							<input
+								type="text"
+								class="penganjur--field"
+								name="penganjur--field-4"
+								id="penganjur--field-4"
+							>
+						</td>
+					</tr>
+				</table>
+			</li>
+			<li class="question">
+				<p>
+					Sila nyatakan tahap penilaian program yang telah dilaksanakan oleh
+					pihak tertentu bagi ibu tunggal di negeri / daerah:
+				</p>
+				<div class="penilaian">
+					<div class="penilaian--radiogroup">
+						<div class="penilaian-radio">
+							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-1">
+							<label for="tahap-penilaian-1">1</label>
+						</div>
+						<div class="penilaian-radio">
+							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-2">
+							<label for="tahap-penilaian-2">2</label>
+						</div>
+						<div class="penilaian-radio">
+							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-3" checked>
+							<label for="tahap-penilaian-3">3</label>
+						</div>
+						<div class="penilaian-radio">
+							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-4">
+							<label for="tahap-penilaian-4">4</label>
+						</div>
+						<div class="penilaian-radio">
+							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-5">
+							<label for="tahap-penilaian-5">5</label>
+						</div>
+					</div>
+					<div class="penilaian--description">
+						<span>Tidak Memuaskan</span>
+						<span>Sangat Memuaskan</span>
+					</div>
+				</div>
+			</li>
+		</section>
+		
+		<section class="bahagian">
+			<h3 class="section-title">Bahagian F: Cadangan Program Ibu Tunggal</h3>
+			<li class="question">
+				<p>
+					Sila nyatakan apakah program yang sesuai bagi ibu tunggal sama ada
+					yang bersifat jangka panjang:
+				</p>
+			</li>
+		</section>
+	</ol>
+	<h3>* Untuk kegunaan ahli Jawatankuasa.</h3>
+	<table class="fees">
+		<tr>
+			<td>Bayaran Masuk Ahli</td>
+			<td>RM10.00</td>
+		</tr>
+		<tr>
+			<td>Yuran Tahunan</td>
+			<td>RM 5.00</td>
+		</tr>
+	</table>
+	<div class="received">
+		<div>Diterima Oleh:</div>
+		<div class="field">
+			<label for="received--date">Tarikh:</label>
+			<input type="date" name="received--date" id="received--date">
+	</div>
+</form>
+
+<!--
+/*
+<header>
+  <h1 class="title">Persatuan Ibu Tunggal Karambunai (PITKA)</h1>
+  <h2 class="subtitle">Borang Keahlian</h2>
+</header>
+*/
+-->

@@ -33,3 +33,24 @@ if ( !function_exists( 'add_action' ) ) {
 	echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
 	exit;
 }
+
+if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
+	class PITKA_Borang_Pendaftaran {
+		public function __construct() {
+			add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
+			add_shortcode( 'PITKA-Borang-Pendaftaran', array( $this, 'shortcode' ) );
+		}
+
+		public static function register_styles() {
+			wp_register_style( 'borang-pendaftaran-style', plugins_url( 'css/borang-pendaftaran.css', __FILE__ ) );
+		}
+
+		public static function shortcode() {
+			wp_enqueue_style('borang-pendaftaran-style');
+			$pitka_bp_form = file_get_contents( plugins_url( 'form.html', __FILE__ ) );
+			return $pitka_bp_form;
+		}
+	}
+
+	$pitka_bp = new PITKA_Borang_Pendaftaran();
+}
