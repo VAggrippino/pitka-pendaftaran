@@ -3,3 +3,11 @@
   flex-direction: column;
   margin-bottom: 1rem;
 }
+
+.field input[type=text], .field select {
+  padding: 0.75rem;
+}
+
+.field input.hidden {
+  display: none;
+}
