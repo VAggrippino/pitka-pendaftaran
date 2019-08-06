@@ -38,14 +38,14 @@
 						</div>
 						<div class="field">
 							<label for="birthplace">Tempat Lahir:</label>
-							<textarea name="birthplace" id="birthplace"></textarea>
+							<textarea class="auto-expand" name="birthplace" id="birthplace"></textarea>
 						</div>
 					</li>
 
 					<li>
 						<div class="field">
 							<label for="address">Alamat Kediaman:</label>
-							<textarea name="address" id="address" class="address"></textarea>
+							<textarea name="address" id="address" class="address auto-expand"></textarea>
 						</div>
 					</li>
 
@@ -112,21 +112,27 @@
 						<option value="India">India</option>
 						<option value="Other">Lain-lain (sila nyatakan)</option>
 					</select>
+				</div>
+				<div class="field">
 					<input type="text" name="bangsa-other" id="bangsa-other" disabled>
 				</div>
 			</li>
 	
 			<li class="question">
-				<label for="agama">Agama:</label>
-				<select name="agama" id="agama">
-					<option value="">-- Sila Pilih Satu --</option>
-					<option value="Islam">Islam</option>
-					<option value="Kristian">Kristian</option>
-					<option value="Buddha">Buddha</option>
-					<option value="Hindu">Hindu</option>
-					<option value="Other">Lain-lain (sila nyatakan)</option>
-				</select>
-				<input type="text" name="agama-other" id="agama-other" disabled>
+				<div class="field">
+					<label for="agama">Agama:</label>
+					<select name="agama" id="agama" onchange='toggleField(this, {"value": "Other", "field": "agama-other"})'>
+						<option value="">-- Sila Pilih Satu --</option>
+						<option value="Islam">Islam</option>
+						<option value="Kristian">Kristian</option>
+						<option value="Buddha">Buddha</option>
+						<option value="Hindu">Hindu</option>
+						<option value="Other">Lain-lain (sila nyatakan)</option>
+					</select>
+				</div>
+				<div class="field">
+					<input type="text" name="agama-other" id="agama-other" disabled>
+				</div>
 			</li>
 							
 			<li class="question">
@@ -166,6 +172,7 @@
 							<textarea
 								name="pekerjaan--organisasi-alamat"
 								id="pekerjaan--organisasi-alamat"
+								class="auto-expand"
 							></textarea>
 						</div>
 					</li>
@@ -173,20 +180,22 @@
 			</li>
         
 			<li class="question">
-				<label for="pendapatan">Tingkat Pendapatan:</label>
-				<select name="pendapatan" id="pendapatan">
-					<option value="">-- Sila Pilih Satu --</option>
-					<option value="<500">Kurang dari RM500</option>
-					<option value="501-750">RM501 - RM750</option>
-					<option value="751-800">RM750 - RM800</option>
-					<option value="801-1000">RM801 - RM1000</option>
-					<option value="1001-1200">RM1001 - RM1200</option>
-					<option value="1201-1400">RM1201 - RM1400</option>
-					<option value="1401-1600">RM1401 - RM1600</option>
-					<option value="1601-1800">RM1601 - RM1800</option>
-					<option value="1801-2000">RM1801 - RM2000</option>
-					<option value=">2000">Lebih dari RM2000</option>
-				</select>
+				<div class="field">
+					<label for="pendapatan">Tingkat Pendapatan:</label>
+					<select name="pendapatan" id="pendapatan">
+						<option value="">-- Sila Pilih Satu --</option>
+						<option value="<500">Kurang dari RM500</option>
+						<option value="501-750">RM501 - RM750</option>
+						<option value="751-800">RM750 - RM800</option>
+						<option value="801-1000">RM801 - RM1000</option>
+						<option value="1001-1200">RM1001 - RM1200</option>
+						<option value="1201-1400">RM1201 - RM1400</option>
+						<option value="1401-1600">RM1401 - RM1600</option>
+						<option value="1601-1800">RM1601 - RM1800</option>
+						<option value="1801-2000">RM1801 - RM2000</option>
+						<option value=">2000">Lebih dari RM2000</option>
+					</select>
+				</div>
 			</li>
 							
 			<li class="question">
@@ -198,6 +207,8 @@
 						<option value="Perceraian">Perceraian</option>
 						<option value="other">Lain-lain (sila nyatakan)</option>
 					</select>
+				</div>
+				<div class="field">
 					<input type="text" name="faktor-other" disabled>
 				</div>
 			</li>
