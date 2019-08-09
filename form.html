@@ -384,7 +384,7 @@
 					Sila nyatakan bentuk masalah yang dihadapi dan tandakan sama ada
 					masalah itu adalah masalah anda atou tanggungan anda.
 				</p>
-				<table id="masalah-table">
+				<table class="masalah-table" id="masalah-table">
 					<tr class="masalah-table--heading">
 						<th>Bentuk Masalah</th>
 						<th>Diri</th>
@@ -501,7 +501,7 @@
 					Sila nyatakan jenis keperluan yang dikehendaki sama ada ibu tunggal
 					atau tanggungan mereka.
 				</p>
-				<table id="keperluan-table">
+				<table class="keperluan-table" id="keperluan-table">
 					<tr class="keperluan-table--heading">
 						<th>Jenis Keperluan</th>
 						<th>Diri</th>
@@ -618,7 +618,7 @@
 				tanggungan mereka dan nyatakan agensi yang telah memberi sumbangan.
 			</p>
 			<li class="question">
-				<table id="bantuan-table">
+				<table class="bantuan-table" id="bantuan-table">
 					<tr class="bantuan-table--heading">
 						<th>Jenis Bantuan</th>
 						<th>Agency Yang Menyumbangkan</th>
@@ -705,7 +705,7 @@
 					Sila isikan nama program dan nama penganjur yang telah dilaksanakan
 					bagi ibu tunggal.
 				</p>
-				<table id="program-table">
+				<table class="program-table" id="program-table">
 					<tr class="program-table--heading">
 						<th>Nama Program</th>
 						<th>Nama Penganjur</th>
@@ -790,31 +790,29 @@
 					pihak tertentu bagi ibu tunggal di negeri / daerah:
 				</p>
 				<div class="penilaian">
-					<div class="penilaian--radiogroup">
-						<div class="penilaian-radio">
-							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-1">
-							<label for="tahap-penilaian-1">1</label>
-						</div>
-						<div class="penilaian-radio">
-							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-2">
-							<label for="tahap-penilaian-2">2</label>
-						</div>
-						<div class="penilaian-radio">
-							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-3" checked>
-							<label for="tahap-penilaian-3">3</label>
-						</div>
-						<div class="penilaian-radio">
-							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-4">
-							<label for="tahap-penilaian-4">4</label>
-						</div>
-						<div class="penilaian-radio">
-							<input type="radio" name="tahap-penilaian" id="tahap-penilaian-5">
-							<label for="tahap-penilaian-5">5</label>
-						</div>
+					<div class="penilaian--icon penilaian--icon--unhappy"><i class="far fa-frown"></i></div>
+					<div class="penilaian--icon penilaian--icon--unimpressed"><i class="far fa-meh"></i></div>
+					<div class="penilaian--icon penilaian--icon--happy"><i class="far fa-smile"></i></div>
+
+					<div class="penilaian--tahap penilaian--tahap1">
+						<input type="radio" name="penilaian--tahap" id="penilaian--tahap1">
+						<label for="tahap-penilaian-1">1</label>
 					</div>
-					<div class="penilaian--description">
-						<span>Tidak Memuaskan</span>
-						<span>Sangat Memuaskan</span>
+					<div class="penilaian--tahap penilaian--tahap2">
+						<input type="radio" name="penilaian--tahap" id="penilaian--tahap2">
+						<label for="penilaian--tahap2">2</label>
+					</div>
+					<div class="penilaian--tahap penilaian--tahap3">
+						<input type="radio" name="penilaian--tahap" id="penilaian--tahap3" checked>
+						<label for="penilaian--tahap3">3</label>
+					</div>
+					<div class="penilaian--tahap penilaian--tahap4">
+						<input type="radio" name="penilaian--tahap" id="penilaian--tahap4">
+						<label for="penilaian--tahap4">4</label>
+					</div>
+					<div class="penilaian--tahap penilaian--tahap5">
+						<input type="radio" name="penilaian--tahap" id="penilaian--tahap5">
+						<label for="penilaian--tahap5">5</label>
 					</div>
 				</div>
 			</li>

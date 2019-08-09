@@ -14,3 +14,109 @@
 .pitka-bp .field input[type=date] {
   text-align: center;
 }
+
+.pitka-bp .question table th {
+  min-width: 5.5ch;
+  word-break: break-all;
+}
+
+.pitka-bp .question table td {
+  padding: 0;
+  text-align: center;
+}
+
+.pitka-bp .question table {
+  width: 100%;
+}
+
+.pitka-bp .question table td input[type=text] {
+  border: none;
+  width: 100%;
+}
+
+.pitka-bp .aset-table th:first-child,
+.pitka-bp .masalah-table th:first-child,
+.pitka-bp .keperluan-table th:first-child {
+  text-align: left;
+}
+
+.pitka-bp .aset-table th,
+.pitka-bp .masalah-table th,
+.pitka-bp .keperluan-table th {
+  text-align: center;
+}
+
+.pitka-bp .aset-table td:first-child,
+.pitka-bp .masalah-table td:first-child,
+.pitka-bp .keperluan-table td:first-child {
+  width: 50%;
+}
+
+.pitka-bp .aset-table td,
+.pitka-bp .masalah-table td,
+.pitka-bp .keperluan-table td {
+  width: 25%;
+}
+
+.pitka-bp .bantuan-table td,
+.pitka-bp .program-table td {
+  width: 50%;
+}
+
+.pitka-bp .bantuan-table td input,
+.pitka-bp .program-table td input {
+  width: 100%;
+}
+
+.pitka-bp .penilaian {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 2rem 2rem;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.pitka-bp .penilaian--icon {
+  grid-row: 1/2;
+  font-size: 1.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pitka-bp .penilaian--icon--unhappy {
+  grid-column: 1/2;
+  color: red;
+}
+
+.pitka-bp .penilaian--icon--unimpressed {
+  grid-column: 3/4;
+  color: gray;
+}
+
+.pitka-bp .penilaian--icon--happy {
+  grid-column: 5/6;
+  color: green;
+}
+
+.pitka-bp .penilaian--tahap {
+  grid-row: 2/3;
+  border: 1px solid silver;
+}
+
+.pitka-bp .penilaian--tahap input[type="radio"] {
+  position: absolute;
+  left: -9001px;
+}
+
+.pitka-bp .penilaian--tahap label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.pitka-bp .penilaian--tahap input[type="radio"]:checked ~ label {
+  color: white;
+  background-color: #111;
+}
