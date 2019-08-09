@@ -38,19 +38,25 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 	class PITKA_Borang_Pendaftaran {
 		public function __construct() {
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 			add_shortcode( 'PITKA-Borang-Pendaftaran', array( $this, 'shortcode' ) );
 		}
 
 		public static function register_styles() {
 			wp_register_style( 'borang-pendaftaran-style', plugins_url( 'css/borang-pendaftaran.css', __FILE__ ) );
+		}
+
+		public static function register_scripts() {
 			wp_register_script( 'borang-pendaftaran-script', plugins_url( 'js/borang-pendaftaran.js', __FILE__ ) );
 			wp_register_script( 'autoExpandTextarea-script', plugins_url( 'js/autoExpandTextarea.js', __FILE__ ) );
+			wp_register_script( 'fontawesome', 'https://kit.fontawesome.com/6cef02ea94.js' );
 		}
 
 		public static function shortcode() {
 			wp_enqueue_style('borang-pendaftaran-style');
 			wp_enqueue_script('borang-pendaftaran-script');
 			wp_enqueue_script('autoExpandTextarea-script');
+			wp_enqueue_script('fontawesome');
 			$pitka_bp_form = file_get_contents( plugins_url( 'form.html', __FILE__ ) );
 			return $pitka_bp_form;
 		}
