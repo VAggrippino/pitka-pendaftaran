@@ -1,7 +1,14 @@
-function toggleField(selector, options) {
-  if (selector.value === options.value) {
-    document.getElementById(options.field).disabled = false;
+function showOtherField(trigger, value, fieldId) {
+  const otherField = document.getElementById(fieldId);
+  if ( value === trigger.value ) {
+    otherField.classList.remove(`hidden`);
+    otherField.querySelectorAll(`input`).forEach((field) => {
+      field.disabled = false;
+    });
   } else {
-    document.getElementById(options.field).disabled = true;
+    otherField.classList.add(`hidden`);
+    otherField.querySelectorAll(`input`).forEach((field) => {
+      field.disabled = true;
+    });
   }
 }

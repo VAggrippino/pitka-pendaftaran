@@ -1,7 +1,18 @@
 .pitka-bp .field {
   margin-bottom: 1rem;
-  display: grid;
-  grid-template-rows: repeat(auto-fit, 1.5rem auto);
+  max-width: 20rem;
+  max-height: 50vh;
+  --tspeed: 250ms;
+  transition: max-width var(--tspeed),
+    max-height var(--tspeed),
+    margin var(--tspeed);
+}
+
+.pitka-bp .field.hidden {
+  max-width: 0;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .pitka-bp .field input,
@@ -103,8 +114,13 @@
   border: 1px solid silver;
 }
 
+.pitka-bp .penilaian {
+  position: relative;
+}
+
 .pitka-bp .penilaian--tahap input[type="radio"] {
   position: absolute;
+  bottom: 0;
   left: -9001px;
 }
 

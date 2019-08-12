@@ -104,34 +104,34 @@
 			<li class="question">
 				<div class="field">
 					<label for="bangsa">Bangsa:</label>
-					<select name="bangsa" id="bangsa">
+					<select name="bangsa" id="bangsa" onchange='showOtherField(this, `other`, `field--bangsa--other`)'>
 						<option value="">-- Sila Pilih Satu --</option>
 						<option value="Melayu">Melayu</option>
 						<option value="Kadazan / Dusun">Kadazan / Dusun</option>
 						<option value="Cina">Cina</option>
 						<option value="India">India</option>
-						<option value="Other">Lain-lain (sila nyatakan)</option>
+						<option value="other">Lain-lain (sila nyatakan)</option>
 					</select>
 				</div>
-				<div class="field">
-					<input type="text" name="bangsa-other" id="bangsa-other" disabled>
+				<div class="field hidden" id="field--bangsa--other">
+					<input type="text" name="bangsa-other" disabled>
 				</div>
 			</li>
 	
 			<li class="question">
 				<div class="field">
 					<label for="agama">Agama:</label>
-					<select name="agama" id="agama" onchange='toggleField(this, {"value": "Other", "field": "agama-other"})'>
+					<select name="agama" id="agama" onchange='showOtherField(this, `other`, `field--agama--other`)'>
 						<option value="">-- Sila Pilih Satu --</option>
 						<option value="Islam">Islam</option>
 						<option value="Kristian">Kristian</option>
 						<option value="Buddha">Buddha</option>
 						<option value="Hindu">Hindu</option>
-						<option value="Other">Lain-lain (sila nyatakan)</option>
+						<option value="other">Lain-lain (sila nyatakan)</option>
 					</select>
 				</div>
-				<div class="field">
-					<input type="text" name="agama-other" id="agama-other" disabled>
+				<div class="field hidden" id="field--agama--other">
+					<input type="text" name="agama-other" disabled>
 				</div>
 			</li>
 							
@@ -201,14 +201,14 @@
 			<li class="question">
 				<div class="field">
 					<label for="faktor">Faktor Menjadi Ibu Tunggal:</label>
-					<select name="faktor" id="faktor">
+					<select name="faktor" id="faktor" onchange="showOtherField(this, `other`, `field--faktor--other`)">
 						<option value="">-- Sila Pilih Satu --</option>
 						<option value="Kematian Suami">Kematian Suami</option>
 						<option value="Perceraian">Perceraian</option>
 						<option value="other">Lain-lain (sila nyatakan)</option>
 					</select>
 				</div>
-				<div class="field">
+				<div class="field hidden" id="field--faktor--other">
 					<input type="text" name="faktor-other" disabled>
 				</div>
 			</li>
@@ -864,6 +864,7 @@
 			</li>
 		</section>
 	</ol>
+	<!--
 	<h3>* Untuk kegunaan ahli Jawatankuasa.</h3>
 	<table class="fees">
 		<tr>
@@ -881,6 +882,7 @@
 			<label for="received--date">Tarikh:</label>
 			<input type="date" name="received--date" id="received--date">
 	</div>
+	-->
 </form>
 
 <!--
