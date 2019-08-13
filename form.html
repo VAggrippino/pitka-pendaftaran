@@ -7,11 +7,11 @@
 
 <form class="pitka-bp" action="#" method="post">
 	<ol>
-		<section class="bahagian">
+		<section class="pitka-bp--peribadi">
 			<h3 class="section-title">Bahagian A: Maklumat Peribadi Ibu Tunggal</h3>
-			<li class="question">
+			<li class="pitka-bp--question">
 				<p>Maklumat peribadi:</p>
-				<ol>
+				<ol class="pitka-bp--question--peribadi">
 					<li>
 						<div class="field">
 							<label for="nama">Nama:</label>
@@ -31,14 +31,16 @@
 						</div>
 					</li>
 
-					<li>
-						<div class="field">
-							<label for="dob">Tarikh Lahir:</label>
-							<input type="date" name="dob" id="dob">
-						</div>
-						<div class="field">
-							<label for="birthplace">Tempat Lahir:</label>
-							<textarea class="auto-expand" name="birthplace" id="birthplace"></textarea>
+					<li class="pitka-bp--question--peribadi--lahir">
+						<div class="grid">
+							<div class="field">
+								<label for="dob">Tarikh Lahir:</label>
+								<input type="date" name="dob" id="dob">
+							</div>
+							<div class="field">
+								<label for="birthplace">Tempat Lahir:</label>
+								<textarea class="auto-expand" name="birthplace" id="birthplace"></textarea>
+							</div>
 						</div>
 					</li>
 
@@ -49,44 +51,46 @@
 						</div>
 					</li>
 
-					<li>
-						<div class="field">
-							<label for="workPhone">No. Telefon Pejabat:</label>
-							<input
-								type="tel"
-								name="workPhone"
-								id="workPhone"
-								pattern="\d{2,3}-\d+"
-								placeholder="###-#######"
-							>
-						</div>
+					<li class="pitka-bp--question--peribadi--telefon">
+						<div class="grid">
+							<div class="field">
+								<label for="workPhone">No. Telefon Pejabat:</label>
+								<input
+									type="tel"
+									name="workPhone"
+									id="workPhone"
+									pattern="\d{2,3}-\d+"
+									placeholder="###-#######"
+								>
+							</div>
 
-						<div class="field">
-							<label for="homePhone">No. Telefon Rumah:</label>
-							<input
-								type="tel"
-								name="homePhone"
-								id="homePhone"
-								pattern="\d{2,3}-\d+"
-								placeholder="###-#######"
-							>
-						</div>
+							<div class="field">
+								<label for="homePhone">No. Telefon Rumah:</label>
+								<input
+									type="tel"
+									name="homePhone"
+									id="homePhone"
+									pattern="\d{2,3}-\d+"
+									placeholder="###-#######"
+								>
+							</div>
 
-						<div class="field">
-							<label for="mobilePhone">No. Telefon Bimbit:</label>
-							<input
-								type="tel"
-								name="mobilePhone"
-								id="mobilePhone"
-								pattern="\d{2,3}-\d+"
-								placeholder="###-#######"
-							>
+							<div class="field">
+								<label for="mobilePhone">No. Telefon Bimbit:</label>
+								<input
+									type="tel"
+									name="mobilePhone"
+									id="mobilePhone"
+									pattern="\d{2,3}-\d+"
+									placeholder="###-#######"
+								>
+							</div>
 						</div>
 					</li>
 				</ol>
 			</li>
         
-			<li class="question">
+			<li class="pitka-bp--question">
 				<div class="field">
 					<label for="age">Umur:</label>
 					<select name="age" id="age">
@@ -101,7 +105,7 @@
 				</div>
 			</li>
 						
-			<li class="question">
+			<li class="pitka-bp--question">
 				<div class="field">
 					<label for="bangsa">Bangsa:</label>
 					<select name="bangsa" id="bangsa" onchange='showOtherField(this, `other`, `field--bangsa--other`)'>
@@ -118,7 +122,7 @@
 				</div>
 			</li>
 	
-			<li class="question">
+			<li class="pitka-bp--question">
 				<div class="field">
 					<label for="agama">Agama:</label>
 					<select name="agama" id="agama" onchange='showOtherField(this, `other`, `field--agama--other`)'>
@@ -135,9 +139,9 @@
 				</div>
 			</li>
 							
-			<li class="question">
+			<li class="pitka-bp--question">
 				<p>Maklumat Pekerjaan:</p>
-				<ol>
+				<ol class="pitka-bp--pekerjaan">
 					<li>
 						<div class="field">
 							<label for="pekerjaan--jenis">
@@ -179,7 +183,7 @@
 				</ol>
 			</li>
         
-			<li class="question">
+			<li class="pitka-bp--question">
 				<div class="field">
 					<label for="pendapatan">Tingkat Pendapatan:</label>
 					<select name="pendapatan" id="pendapatan">
@@ -198,7 +202,7 @@
 				</div>
 			</li>
 							
-			<li class="question">
+			<li class="pitka-bp--question">
 				<div class="field">
 					<label for="faktor">Faktor Menjadi Ibu Tunggal:</label>
 					<select name="faktor" id="faktor" onchange="showOtherField(this, `other`, `field--faktor--other`)">
@@ -213,7 +217,7 @@
 				</div>
 			</li>
 
-			<li class="question">
+			<li class="pitka-bp--question">
 				<p>
 					Sila senaraikan aset yang dimiliki oleh ibu tunggal dan nyatakan status
 					aset tersebut sama ada ia milik sendiri ibu tunggal, disewa, atau
@@ -328,7 +332,7 @@
 				</table>
 			</li>
 
-			<li class="question">
+			<li class="pitka-bp--question">
 				<p>Maklumat Tanggungan:</p>
 				<ol>
 					<li>
@@ -379,7 +383,7 @@
 
 		<section class="bahagian">
 			<h3 class="section-title">Bahagian B: Klasifikasi Permasalahan Ibu Tunggal</h3>
-			<li class="question">
+			<li class="pitka-bp--question">
 				<p>
 					Sila nyatakan bentuk masalah yang dihadapi dan tandakan sama ada
 					masalah itu adalah masalah anda atou tanggungan anda.
@@ -496,7 +500,7 @@
 
 		<section class="bahagian">
 			<h3 class="section-title">Bahagian C: Klasifikasi Keperluan Ibu Tunggal</h3>
-			<li class="question">
+			<li class="pitka-bp--question">
 				<p>
 					Sila nyatakan jenis keperluan yang dikehendaki sama ada ibu tunggal
 					atau tanggungan mereka.
@@ -617,7 +621,7 @@
 				Sila nyatakan jenis bantuan yang telah diberikan kepada ibu tunggal atau
 				tanggungan mereka dan nyatakan agensi yang telah memberi sumbangan.
 			</p>
-			<li class="question">
+			<li class="pitka-bp--question">
 				<table class="bantuan-table" id="bantuan-table">
 					<tr class="bantuan-table--heading">
 						<th>Jenis Bantuan</th>
@@ -700,7 +704,7 @@
 		</section>
 		<section class="bahagian">
 			<h3 class="section-title">Bahagian E: Maklumat Program Ibu Tunggal Yang Telah Dihadiri</h3>
-			<li class="question">
+			<li class="pitka-bp--question">
 				<p>
 					Sila isikan nama program dan nama penganjur yang telah dilaksanakan
 					bagi ibu tunggal.
@@ -784,7 +788,7 @@
 					</tr>
 				</table>
 			</li>
-			<li class="question">
+			<li class="pitka-bp--question">
 				<p>
 					Sila nyatakan tahap penilaian program yang telah dilaksanakan oleh
 					pihak tertentu bagi ibu tunggal di negeri / daerah:
@@ -820,29 +824,29 @@
 		
 		<section class="bahagian">
 			<h3 class="section-title">Bahagian F: Cadangan Program Ibu Tunggal</h3>
-			<li class="question">
+			<li class="pitka-bp--question pitka-bp--question--programs">
 				<p>
 					Sila nyatakan apakah program yang sesuai bagi ibu tunggal sama ada
 					yang bersifat jangka panjang atau jangka pendek:
 				</p>
-				<table class="programs">
-					<tr class="programs--heading">
+				<table class="programs--table">
+					<tr class="programs--table--heading">
 						<th>Program</th>
 						<th>Penganjur</th>
 						<th>Pendek</th>
 						<th>Panjang</th>
 					</tr>
-					<tr class="programs--program">
+					<tr class="programs--table--program">
 						<td class="programs--program--nama">
 							<input type="text" name="programs--program--name1" >
 						</td>
-						<td class="programs--program--penganjur">
+						<td class="programs--table--penganjur">
 							<input type="text" name="programs--program--penganjur1">
 						</td>
-						<td class="programs--program--pendek">
+						<td class="programs--table--pendek">
 							<input type="checkbox" name="programs--program--pendek1">
 						</td>
-						<td class="programs--program--panjang">
+						<td class="programs--table--panjang">
 							<input type="checkbox" name="programs--program--panjang1">
 						</td>
 					</tr>
