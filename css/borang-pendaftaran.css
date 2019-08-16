@@ -19,6 +19,7 @@
 .pitka-bp .field input,
 .pitka-bp .field select,
 .pitka-bp .field textarea {
+  height: 2rem;
   padding: 0.25rem 0.75rem;
   width: 100%;
 }
@@ -80,14 +81,15 @@
   width: 100%;
 }
 
-.pitka-bp .penilaian {
+.pitka-bp--program-penilaian--penilaian {
   width: 100%;
   display: grid;
   grid-template-rows: 2rem 2rem;
   grid-template-columns: repeat(5, 1fr);
+  position: relative;
 }
 
-.pitka-bp .penilaian--icon {
+.pitka-bp--program-penilaian--icon {
   grid-row: 1/2;
   font-size: 1.75rem;
   display: flex;
@@ -95,37 +97,33 @@
   align-items: center;
 }
 
-.pitka-bp .penilaian--icon--unhappy {
+.pitka-bp--program-penilaian--icon.unhappy {
   grid-column: 1/2;
   color: red;
 }
 
-.pitka-bp .penilaian--icon--unimpressed {
+.pitka-bp--program-penilaian--icon.unimpressed {
   grid-column: 3/4;
   color: gray;
 }
 
-.pitka-bp .penilaian--icon--happy {
+.pitka-bp--program-penilaian--icon.happy {
   grid-column: 5/6;
   color: green;
 }
 
-.pitka-bp .penilaian--tahap {
+.pitka-bp--program-penilaian--tahap {
   grid-row: 2/3;
   border: 1px solid silver;
 }
 
-.pitka-bp .penilaian {
-  position: relative;
-}
-
-.pitka-bp .penilaian--tahap input[type="radio"] {
+.pitka-bp--program-penilaian--tahap input[type="radio"] {
   position: absolute;
   bottom: 0;
   left: -9001px;
 }
 
-.pitka-bp .penilaian--tahap label {
+.pitka-bp--program-penilaian--tahap label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,7 +131,7 @@
   height: 100%;
 }
 
-.pitka-bp .penilaian--tahap input[type="radio"]:checked ~ label {
+.pitka-bp--program-penilaian--tahap input[type="radio"]:checked ~ label {
   color: white;
   background-color: #111;
 }
@@ -167,5 +165,16 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
+  }
+
+  .pitka-bp--program-penilaian {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    align-items: end;
+  }
+
+  .pitka-bp--program-penilaian--description {
+    grid-column: 1/3;
   }
 }

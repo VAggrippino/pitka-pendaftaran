@@ -332,49 +332,41 @@
 				</table>
 			</li>
 
-			<li class="pitka-bp--question">
+			<li class="pitka-bp--question tanggungan">
 				<p>Maklumat Tanggungan:</p>
 				<ol>
 					<li>
 						<div class="field">
-							<label for="dependant-count">Bilangan Tanggungan:</label>
-							<input type="number" name="dependants--total-count" id="dependants--total-count">
+							<label for="tanggungan--bilangan">Bilangan Tanggungan:</label>
+							<input type="number" name="tanggungan--bilangan" id="tanggungan--bilangan">
 						</div>
 					</li>
 						
 					<li>
 						<div class="field">
-							<label for="dependant-school-count">Bilangan Anak Bersekolah:</label>
-							<input type="number" name="dependants--in-school-count" id="dependants--in-school-count">
+							<label for="tanggungan--anak-bersekolah">Bilangan Anak Bersekolah:</label>
+							<input type="number" name="tanggungan--anak-bersekolah" id="tanggungan--anak-bersekolah">
 						</div>
 					</li>
 						
 					<li>
 						<div class="field">
-							<label for="dependant-count">Bilangan Anak Bekerja:</label>
-							<input
-								type="number"
-								name="dependents--children-working-count"
-								id="dependents--children-working-count"
-							>
+							<label for="tanggungan--anak-berkerja">Bilangan Anak Bekerja:</label>
+							<input type="number" name="tanggungan--anak-berkerja" id="tanggungan--anak-berkerja">
 						</div>
 					</li>
 			
 					<li>
 						<div class="field">
-							<label for="dependant-count">Pekerjaan Anak:</label>
-							<input
-								type="text"
-								name="dependants--children-work"
-								id="dependants--children-work"
-							>
+							<label for="tanggungan--pekerjaan-anak">Pekerjaan Anak:</label>
+							<input type="text" name="tanggungan--pekerjaan-anak" id="tanggungan--pekerjaan-anak">
 						</div>
 					</li>
             
 					<li>
 						<div class="field">
-							<label for="dependant-count">Bilangan Anak Mengganggur:</label>
-							<input type="number" name="dependents--unemployed-count" id="dependents--unemployed-count">
+							<label for="tanggungan--anak-mengganggur">Bilangan Anak Mengganggur:</label>
+							<input type="number" name="tanggungan--anak-mengganggur" id="tanggungan--anak-mengganggur">
 						</div>
 					</li>
 				</ol>
@@ -778,45 +770,45 @@
 							>
 						</td>
 						<td class="penganjur">
-							<input
-								type="text"
-								class="penganjur--field"
-								name="penganjur--field-4"
-								id="penganjur--field-4"
-							>
+							<input type="text" class="penganjur--field" name="penganjur--field-4" id="penganjur--field-4">
 						</td>
 					</tr>
 				</table>
 			</li>
-			<li class="pitka-bp--question">
-				<p>
+			<li class="pitka-bp--question pitka-bp--program-penilaian">
+				<p class="pitka-bp--program-penilaian--description">
 					Sila nyatakan tahap penilaian program yang telah dilaksanakan oleh
 					pihak tertentu bagi ibu tunggal di negeri / daerah:
 				</p>
-				<div class="penilaian">
-					<div class="penilaian--icon penilaian--icon--unhappy"><i class="far fa-frown"></i></div>
-					<div class="penilaian--icon penilaian--icon--unimpressed"><i class="far fa-meh"></i></div>
-					<div class="penilaian--icon penilaian--icon--happy"><i class="far fa-smile"></i></div>
+				<div class="field pitka-bp--program-penilaian--name">
+					<input type="text" name="pitka-bp--program-penilaian--name" id="pitka-bp--program-penilaian--name">
+				</div>
+				<div class="field">
+					<div class="pitka-bp--program-penilaian--penilaian">
+						<div class="pitka-bp--program-penilaian--icon unhappy"><i class="far fa-frown"></i></div>
+						<div class="pitka-bp--program-penilaian--icon unimpressed"><i class="far fa-meh"></i></div>
+						<div class="pitka-bp--program-penilaian--icon happy"><i class="far fa-smile"></i></div>
 
-					<div class="penilaian--tahap penilaian--tahap1">
-						<input type="radio" name="penilaian--tahap" id="penilaian--tahap1">
-						<label for="penilaian--tahap1">1</label>
-					</div>
-					<div class="penilaian--tahap penilaian--tahap2">
-						<input type="radio" name="penilaian--tahap" id="penilaian--tahap2">
-						<label for="penilaian--tahap2">2</label>
-					</div>
-					<div class="penilaian--tahap penilaian--tahap3">
-						<input type="radio" name="penilaian--tahap" id="penilaian--tahap3" checked>
-						<label for="penilaian--tahap3">3</label>
-					</div>
-					<div class="penilaian--tahap penilaian--tahap4">
-						<input type="radio" name="penilaian--tahap" id="penilaian--tahap4">
-						<label for="penilaian--tahap4">4</label>
-					</div>
-					<div class="penilaian--tahap penilaian--tahap5">
-						<input type="radio" name="penilaian--tahap" id="penilaian--tahap5">
-						<label for="penilaian--tahap5">5</label>
+						<div class="pitka-bp--program-penilaian--tahap tahap1">
+							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap1">
+							<label for="pitka-bp--program-penilaian--tahap1">1</label>
+						</div>
+						<div class="pitka-bp--program-penilaian--tahap tahap2">
+							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap2">
+							<label for="pitka-bp--program-penilaian--tahap2">2</label>
+						</div>
+						<div class="pitka-bp--program-penilaian--tahap tahap3">
+							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap3" checked>
+							<label for="pitka-bp--program-penilaian--tahap3">3</label>
+						</div>
+						<div class="pitka-bp--program-penilaian--tahap tahap4">
+							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap4">
+							<label for="pitka-bp--program-penilaian--tahap4">4</label>
+						</div>
+						<div class="pitka-bp--program-penilaian--tahap tahap5">
+							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap5">
+							<label for="pitka-bp--program-penilaian--tahap5">5</label>
+						</div>
 					</div>
 				</div>
 			</li>
