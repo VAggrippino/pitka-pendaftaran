@@ -60,6 +60,47 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$pitka_bp_form = file_get_contents( plugins_url( 'form.html', __FILE__ ) );
 			return $pitka_bp_form;
 		}
+
+		private function create_table_pendaftaran() {
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'pitka_pendaftaran';
+			$charset_collate = $wpdb->get_charset_collate();
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP
+				nama varchar(255) NOT NULL
+				kad_pengenalan_baru varchar(14),
+				tarikh_lahir date,
+				tempat_lahir varchar(255),
+				alamat_kediaman varchar(255),
+				telefon_pejabat varchar(15),
+				telefon_rumah varchar(15),
+				telefon_bimbit varchar(15),
+				bangsa varchar(30),
+				agama varchar(30),
+				jenis_pekerjaan varchar(255),
+				jawatan varchar(255),
+				nama_organisasi varchar(255),
+				alamat_organisasi varchar(255),
+				tingkat_pendapatan varchar(10),
+				faktor_menjadi_ibu_tungga varchar(20),
+				tanggungan_bilangan tinyint,
+				tanggungan_anak_bersekolah tinyint,
+				tanggungan_anak_berkerja tinyint,
+				tanggungan_perkerjaan_anak varchar(255),
+				tanggungan_anak_menggangur tinyint
+				PRIMARY KEY  (id)
+			) $charset_collate;";
+
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			dbDelta( $sql );
+		}
+
+		public static function install() {
+			$this->create_table_pendaftaran();
+		}
 	}
 
 	$pitka_bp = new PITKA_Borang_Pendaftaran();
