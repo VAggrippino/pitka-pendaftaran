@@ -36,6 +36,8 @@ if ( !function_exists( 'add_action' ) ) {
 
 if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 	class PITKA_Borang_Pendaftaran {
+		var $pitka_pendaftaran_db_version = '1.0.0';
+
 		public function __construct() {
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
@@ -61,10 +63,16 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			return $pitka_bp_form;
 		}
 
-		private function create_table_pendaftaran() {
+		private function create_pitka_table( $sql ) {
 			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_pendaftaran';
 			$charset_collate = $wpdb->get_charset_collate();
+
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			dbDelta( $sql );
+		}
+
+		private function create_table_member() {
+			$table_name = $wpdb->prefix . 'pitka_member';
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -94,12 +102,147 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
-			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-			dbDelta( $sql );
+			$this->create_pitka_table( $sql );
 		}
 
-		public static function install() {
-			$this->create_table_pendaftaran();
+		private function create_table_aset() {
+			$table_name = $wpdb->prefix . 'pitka_member_aset';
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				member_id mediumint(9),
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+				description varchar(255),
+				sendiri boolean
+				PRIMARY KEY  (id)
+				FOREIGN KEY member_id REFERENCES pitka_member(id)
+			) $charset_collate;";
+
+			$this->create_pitka_table( $sql );
+		}
+
+		private function create_table_permasalahan() {
+			$table_name = $wpdb->prefix . 'pitka_member_permasalahan';
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				member_id mediumint(9),
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP
+				description varchar(255),
+				diri boolean,
+				tanggungan boolean
+				PRIMARY KEY  (id)
+				FOREIGN KEY member_id REFERENCES pitka_member(id)
+			) $charset_collate;";
+
+			$this->create_pitka_table( $sql );
+		}
+
+		private function create_table_keperluan() {
+			$table_name = $wpdb->prefix . 'pitka_member_keperluan';
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				member_id mediumint(9),
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP
+				description varchar(255),
+				diri boolean,
+				tanggungan boolean
+				PRIMARY KEY  (id)
+				FOREIGN KEY member_id REFERENCES pitka_member(id)
+			) $charset_collate;";
+
+			$this->create_pitka_table( $sql );
+		}
+
+		private function create_table_bantuan() {
+			$table_name = $wpdb->prefix . 'pitka_member_bantuan';
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				member_id mediumint(9),
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP
+				jenis varchar(255),
+				agency varchar(255)
+				PRIMARY KEY  (id)
+				FOREIGN KEY member_id REFERENCES pitka_member(id)
+			) $charset_collate;";
+
+			$this->create_pitka_table( $sql );
+		}
+
+		private function create_table_program() {
+			$table_name = $wpdb->prefix . 'pitka_member_program';
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				member_id mediumint(9),
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+				program varchar(255),
+				penganjur varchar(255)
+				PRIMARY KEY  (id)
+				FOREIGN KEY member_id REFERENCES pitka_member(id)
+			) $charset_collate;";
+
+			$this->create_pitka_table( $sql );
+		}
+
+		private function create_table_fee() {
+			$table_name = $wpdb->prefix . 'pitka_fee';
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+				description varchar(255),
+				amount decimal(10,2)
+				PRIMARY KEY  (id)
+			) $charset_collate;";
+
+			$this->create_pitka_table( $sql );
+		}
+
+		private function create_table_payment() {
+			$table_name = $wpdb->prefix . 'pitka_member_payment';
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				member_id mediumint(9),
+				fee_id mediumint(9),
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+				paid boolean
+				PRIMARY KEY  (id)
+				FOREIGN KEY member_id REFERENCES pitka_member(id)
+				FOREIGN KEY fee_id REFERENCES pitka_fee(id)
+			) $charset_collate;";
+
+			$this->create_pitka_table( $sql );
+		}
+
+		public static function create_tables() {
+			$installed_db_version = get_option( 'pitka_pendaftaran_db_version' );
+			if ( $installed_db_version !== $this->pitka_pendaftaran_db_version ) {
+				$this->create_table_member();
+				$this->create_table_aset();
+				$this->create_table_permasalahan();
+				$this->create_table_keperluan();
+				$this->create_table_bantuan();
+				$this->create_table_program();
+				$this->create_table_fee();
+				$this->create_table_payment();
+
+				if ( $installed_db_version === false ) {
+					add_option( 'pitka_pendaftaran_db_version', $this->pitka-$pitka_pendaftaran_db_version );
+				} else {
+					update_option( 'pitka_pendaftaran_db_version', $this->pitka-$pitka_pendaftaran_db_version );
+				}
+			}
 		}
 	}
 
