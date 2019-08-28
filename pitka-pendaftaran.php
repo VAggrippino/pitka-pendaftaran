@@ -189,6 +189,8 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
+				penganjur varchar(255),
+				penilaian tinyint(1)
 			) $charset_collate;";
 		}
 
