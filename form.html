@@ -288,8 +288,8 @@
             
 					<li>
 						<div class="field">
-							<label for="tanggungan--anak-mengganggur">Bilangan Anak Mengganggur:</label>
-							<input type="number" name="tanggungan--anak-mengganggur" id="tanggungan--anak-mengganggur">
+							<label for="tanggungan--anak-menganggur">Bilangan Anak Menganggur:</label>
+							<input type="number" name="tanggungan--anak-menganggur" id="tanggungan--anak-menganggur">
 						</div>
 					</li>
 				</ol>
@@ -703,37 +703,104 @@
 					Sila nyatakan tahap penilaian program yang telah dilaksanakan oleh
 					pihak tertentu bagi ibu tunggal di negeri / daerah:
 				</p>
-				<div class="field pitka-bp--program-penilaian--name">
-					<input type="text" name="pitka-bp--program-penilaian--name" id="pitka-bp--program-penilaian--name">
-				</div>
-				<div class="field">
-					<div class="pitka-bp--program-penilaian--penilaian">
-						<div class="pitka-bp--program-penilaian--icon unhappy"><i class="far fa-frown"></i></div>
-						<div class="pitka-bp--program-penilaian--icon unimpressed"><i class="far fa-meh"></i></div>
-						<div class="pitka-bp--program-penilaian--icon happy"><i class="far fa-smile"></i></div>
-
-						<div class="pitka-bp--program-penilaian--tahap tahap1">
-							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap1">
-							<label for="pitka-bp--program-penilaian--tahap1">1</label>
-						</div>
-						<div class="pitka-bp--program-penilaian--tahap tahap2">
-							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap2">
-							<label for="pitka-bp--program-penilaian--tahap2">2</label>
-						</div>
-						<div class="pitka-bp--program-penilaian--tahap tahap3">
-							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap3" checked>
-							<label for="pitka-bp--program-penilaian--tahap3">3</label>
-						</div>
-						<div class="pitka-bp--program-penilaian--tahap tahap4">
-							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap4">
-							<label for="pitka-bp--program-penilaian--tahap4">4</label>
-						</div>
-						<div class="pitka-bp--program-penilaian--tahap tahap5">
-							<input type="radio" name="pitka-bp--program-penilaian--tahap" id="pitka-bp--program-penilaian--tahap5">
-							<label for="pitka-bp--program-penilaian--tahap5">5</label>
-						</div>
-					</div>
-				</div>
+				<table class="pitka-bp--penilaian-table">
+					<tr>
+						<th>Program</th>
+						<th>Penilaian</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<div class="pitka-bp--penilaian-table--icons">
+								<div class="pitka-bp--penilaian-table--icon unhappy"><i class="far fa-frown"></i></div>
+								<div class="pitka-bp--penilaian-table--icon unimpressed"><i class="far fa-meh"></i></div>
+								<div class="pitka-bp--penilaian-table--icon happy"><i class="far fa-smile"></i></div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text"
+								class="pitka-bp--penilaian-table--name"
+								name="pitka-bp--penilaian-table--name-1">
+						</td>
+						<td>
+							<div class="pitka-bp--penilaian-table--penilaian">
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap1">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-1"
+										id="pitka-bp--penilaian-table--penilaian1-1">
+									<label for="pitka-bp--penilaian-table--penilaian1-1">1</label>
+								</div>
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap2">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-1"
+										id="pitka-bp--penilaian-table--penilaian2-1">
+									<label for="pitka-bp--penilaian-table--penilaian2-1">2</label>
+								</div>
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap3">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-1"
+										id="pitka-bp--penilaian-table--penilaian3-1" checked>
+									<label for="pitka-bp--penilaian-table--penilaian3-1">3</label>
+								</div>
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap4">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-1"
+										id="pitka-bp--penilaian-table--penilaian4-1">
+									<label for="pitka-bp--penilaian-table--penilaian4-1">4</label>
+								</div>
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap5">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-1"
+										id="pitka-bp--penilaian-table--penilaian5-1">
+									<label for="pitka-bp--penilaian-table--penilaian5-1">5</label>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text"
+								class="pitka-bp--penilaian-table--name"
+								name="pitka-bp--penilaian-table--name-2">
+						</td>
+						<td>
+							<div class="pitka-bp--penilaian-table--penilaian">
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap1">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-2"
+										id="pitka-bp--penilaian-table--penilaian1-2">
+									<label for="pitka-bp--penilaian-table--penilaian1-2">1</label>
+								</div>
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap2">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-2"
+										id="pitka-bp--penilaian-table--penilaian2-2">
+									<label for="pitka-bp--penilaian-table--penilaian2-2">2</label>
+								</div>
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap3">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-2"
+										id="pitka-bp--penilaian-table--penilaian3-2" checked>
+									<label for="pitka-bp--penilaian-table--penilaian3-2">3</label>
+								</div>
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap4">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-2"
+										id="pitka-bp--penilaian-table--penilaian4-2">
+									<label for="pitka-bp--penilaian-table--penilaian4-2">4</label>
+								</div>
+								<div class="pitka-bp--penilaian-table--penilaian--tahap tahap5">
+									<input type="radio"
+										name="pitka-bp--penilaian-table--penilaian-2"
+										id="pitka-bp--penilaian-table--penilaian5-2">
+									<label for="pitka-bp--penilaian-table--penilaian5-2">5</label>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</li>
 		</section>
 		
