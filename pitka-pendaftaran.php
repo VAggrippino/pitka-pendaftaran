@@ -65,7 +65,6 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		private function create_pitka_table( $sql ) {
 			global $wpdb;
-			$charset_collate = $wpdb->get_charset_collate();
 
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 			dbDelta( $sql );
@@ -73,6 +72,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		private function create_table_member() {
 			$table_name = $wpdb->prefix . 'pitka_member';
+			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -90,15 +90,15 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				agama varchar(30),
 				jenis_pekerjaan varchar(255),
 				jawatan varchar(255),
-				nama_organisasi varchar(255),
-				alamat_organisasi varchar(255),
+				nama_pekerja varchar(255),
+				alamat_pekerja varchar(255),
 				tingkat_pendapatan varchar(10),
-				faktor_menjadi_ibu_tungga varchar(20),
-				tanggungan_bilangan tinyint,
-				tanggungan_anak_bersekolah tinyint,
-				tanggungan_anak_berkerja tinyint,
-				tanggungan_perkerjaan_anak varchar(255),
-				tanggungan_anak_menggangur tinyint
+				faktor_menjadi_ibu_tunggal varchar(20),
+				bilangan_tanggungan tinyint,
+				bilangan_anak_bersekolah tinyint,
+				bilangan_anak_bekerja tinyint,
+				pekerjaan_anak varchar(255),
+				bilangan_anak_menganggur tinyint
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
@@ -107,6 +107,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		private function create_table_aset() {
 			$table_name = $wpdb->prefix . 'pitka_member_aset';
+			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -124,6 +125,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		private function create_table_permasalahan() {
 			$table_name = $wpdb->prefix . 'pitka_member_permasalahan';
+			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -142,6 +144,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		private function create_table_keperluan() {
 			$table_name = $wpdb->prefix . 'pitka_member_keperluan';
+			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -160,6 +163,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		private function create_table_bantuan() {
 			$table_name = $wpdb->prefix . 'pitka_member_bantuan';
+			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -175,15 +179,29 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$this->create_pitka_table( $sql );
 		}
 
-		private function create_table_program() {
-			$table_name = $wpdb->prefix . 'pitka_member_program';
+		private function create_table_program_received() {
+			$table_name = $wpdb->prefix . 'pitka_member_program_received';
+			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				program varchar(255),
+				description varchar(255),
+			) $charset_collate;";
+		}
+
+		private function create_table_program_suggested() {
+			$table_name = $wpdb->prefix . 'pitka_member_program_suggested';
+			$charset_collate = $wpdb->get_charset_collate();
+
+			$sql = "CREATE TABLE $table_name (
+				id mediumint(9) NOT NULL AUTO_INCREMENT,
+				member_id mediumint(9),
+				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+				description varchar(255),
 				penganjur varchar(255)
 				PRIMARY KEY  (id)
 				FOREIGN KEY member_id REFERENCES pitka_member(id)
@@ -194,13 +212,15 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		private function create_table_fee() {
 			$table_name = $wpdb->prefix . 'pitka_fee';
+			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
-				amount decimal(10,2)
+				amount decimal(10,2),
+				auto_add boolean
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
@@ -209,6 +229,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		private function create_table_payment() {
 			$table_name = $wpdb->prefix . 'pitka_member_payment';
+			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
