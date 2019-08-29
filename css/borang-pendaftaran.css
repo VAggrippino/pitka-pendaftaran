@@ -71,70 +71,66 @@
   width: 25%;
 }
 
-.pitka-bp .bantuan-table td,
-.pitka-bp .program-table td {
+.pitka-bp .bantuan-table td {
   width: 50%;
 }
 
-.pitka-bp .bantuan-table td input,
-.pitka-bp .program-table td input {
+.pitka-bp .bantuan-table td input {
   width: 100%;
 }
 
-.pitka-bp--program-penilaian--penilaian {
+.pitka-bp--program-table td {
+  width: 33%;
+}
+
+.pitka-bp--program-table td:nth-child(3) {
+  width: 34%;
+}
+
+.pitka-bp--program-table--penilaian {
   position: relative;
 }
 
-.pitka-bp--penilaian-table th,
-.pitka-bp--penilaian-table td {
-  width: 50%;
-}
-
-.pitka-bp--penilaian-table--penilaian {
-  position: relative;
-}
-
-.pitka-bp--penilaian-table--penilaian,
-.pitka-bp--penilaian-table--icons {
+.pitka-bp--program-table--penilaian,
+.pitka-bp--program-table--icons {
   display: grid;
   width: 100%;
   height: 100%;
   grid-template-columns: repeat(10, 10%);
 }
 
-.pitka-bp--penilaian-table--icon {
+.pitka-bp--program-table--icon {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.75rem;
 }
 
-.pitka-bp--penilaian-table--icon.unhappy {
+.pitka-bp--program-table--icon.unhappy {
   grid-column: 1/3;
   color: red;
 }
 
-.pitka-bp--penilaian-table--icon.unimpressed {
+.pitka-bp--program-table--icon.unimpressed {
   grid-column: 3/9;
   color: gray;
 }
 
-.pitka-bp--penilaian-table--icon.happy {
+.pitka-bp--program-table--icon.happy {
   grid-column: 9/11;
   color: green;
 }
 
-.pitka-bp--penilaian-table--penilaian--tahap {
+.pitka-bp--program-table--penilaian--tahap {
   grid-column: span 2;
 }
 
-.pitka-bp--penilaian-table--penilaian--tahap input[type="radio"] {
+.pitka-bp--program-table--penilaian--tahap input[type="radio"] {
   position: absolute;
   bottom: 0;
   left: -9001px;
 }
 
-.pitka-bp--penilaian-table--penilaian--tahap label {
+.pitka-bp--program-table--penilaian--tahap label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,7 +139,7 @@
   border: 1px solid gray;
 }
 
-.pitka-bp--penilaian-table--penilaian--tahap input[type="radio"]:checked ~ label {
+.pitka-bp--program-table--penilaian--tahap input[type="radio"]:checked ~ label {
   color: white;
   background-color: #111;
   border-color: silver;
