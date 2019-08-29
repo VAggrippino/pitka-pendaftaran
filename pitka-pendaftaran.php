@@ -42,6 +42,56 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 			add_shortcode( 'PITKA-Borang-Pendaftaran', array( $this, 'shortcode' ) );
+			add_action( 'admin_menu', array( $this, 'pitka_membership_menu' ) );
+		}
+
+		public static function pitka_membership_menu() {
+			add_menu_page(
+				'Membership',
+				'Members',
+				'manage_options',
+				'pitka-membership',
+				array( $this, 'show_members' )
+			);
+
+			add_submenu_page(
+				'pitka-membership',
+				'Members',
+				'All Members',
+				'manage_options',
+				'pitka-membership',
+				array( $this, 'show_members' )
+			);
+
+			add_submenu_page(
+				'pitka-membership',
+				'Members with Unpaid Fees',
+				'Unpaid Fees',
+				'manage_options',
+				'pitka-membership-unpaid',
+				array( $this, 'show_unpaid_members' )
+			);
+
+			add_submenu_page(
+				'pitka-membership',
+				'New Members',
+				'New Members',
+				'manage_options',
+				'pitka-membership-new',
+				array( $this, 'show_new_members' )
+			);
+		}
+
+		public static function show_members() {
+			echo "<h1>PITKA Members</h1>";
+		}
+
+		public static function show_unpaid_members() {
+			echo "<h1>Members with Unpaid Fees</h1>";
+		}
+
+		public static function show_new_members() {
+			echo "<h1>Newest Members</h1>";
 		}
 
 		public static function register_styles() {
