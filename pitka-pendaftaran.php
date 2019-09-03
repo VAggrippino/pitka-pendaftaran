@@ -66,7 +66,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			add_submenu_page(
 				'pitka-membership',
 				'Members with Unpaid Fees',
-				'Unpaid Fees',
+				'Unpaid Members',
 				'manage_options',
 				'pitka-membership-unpaid',
 				array( $this, 'show_unpaid_members' )
@@ -80,18 +80,44 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				'pitka-membership-new',
 				array( $this, 'show_new_members' )
 			);
+
+			add_submenu_page(
+				'pitka-membership',
+				'Membership Tools',
+				'Membership Tools',
+				'manage_options',
+				'pitka-membership-tools',
+				array( $this, 'show_membership_tools' )
+			);
+
+			add_submenu_page(
+				'pitka-membership',
+				'Membership Settings',
+				'Membership Settings',
+				'manage_options',
+				'pitka-membership-settings',
+				array( $this, 'show_membership_settings' )
+			);
 		}
 
 		public static function show_members() {
-			echo "<h1>PITKA Members</h1>";
+			require( plugin_dir_path( __FILE__ ) . 'pitka-membership.php' );
 		}
 
 		public static function show_unpaid_members() {
-			echo "<h1>Members with Unpaid Fees</h1>";
+			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-unpaid.php' );
 		}
 
 		public static function show_new_members() {
-			echo "<h1>Newest Members</h1>";
+			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-new.php' );
+		}
+
+		public static function show_membership_settings() {
+			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-settings.php' );
+		}
+
+		public static function show_membership_tools() {
+			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-tools.php' );
 		}
 
 		public static function register_styles() {
