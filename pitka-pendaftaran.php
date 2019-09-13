@@ -43,6 +43,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 			add_shortcode( 'PITKA-Borang-Pendaftaran', array( $this, 'shortcode' ) );
 			add_action( 'admin_menu', array( $this, 'pitka_membership_menu' ) );
+			register_activation_hook( __FILE__, array( $this, 'create_tables' ) );
 		}
 
 		public static function pitka_membership_menu() {
@@ -142,19 +143,22 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		private function create_pitka_table( $sql ) {
 			global $wpdb;
 
-			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-			dbDelta( $sql );
+			$result = $wpdb->query( $sql );
+			if ( false === $result ) {
+				die( $wpdb->last_error );
+			}
 		}
 
 		private function create_table_member() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_member';
 			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP
-				nama varchar(255) NOT NULL
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+				nama varchar(255) NOT NULL,
 				kad_pengenalan_baru varchar(14),
 				tarikh_lahir date,
 				tempat_lahir varchar(255),
@@ -174,7 +178,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				bilangan_anak_bersekolah tinyint,
 				bilangan_anak_bekerja tinyint,
 				pekerjaan_anak varchar(255),
-				bilangan_anak_menganggur tinyint
+				bilangan_anak_menganggur tinyint,
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
@@ -182,6 +186,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		}
 
 		private function create_table_aset() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_member_aset';
 			$charset_collate = $wpdb->get_charset_collate();
 
@@ -191,15 +196,16 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
-				sendiri boolean
-				PRIMARY KEY  (id)
-				FOREIGN KEY member_id REFERENCES pitka_member(id)
+				sendiri boolean,
+				PRIMARY KEY  (id),
+				CONSTRAINT `fk_aset_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 			) $charset_collate;";
 
 			$this->create_pitka_table( $sql );
 		}
 
 		private function create_table_permasalahan() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_member_permasalahan';
 			$charset_collate = $wpdb->get_charset_collate();
 
@@ -207,18 +213,19 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				diri boolean,
-				tanggungan boolean
-				PRIMARY KEY  (id)
-				FOREIGN KEY member_id REFERENCES pitka_member(id)
+				tanggungan boolean,
+				PRIMARY KEY  (id),
+				CONSTRAINT `fk_permasalahan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 			) $charset_collate;";
 
 			$this->create_pitka_table( $sql );
 		}
 
 		private function create_table_keperluan() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_member_keperluan';
 			$charset_collate = $wpdb->get_charset_collate();
 
@@ -226,18 +233,19 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				diri boolean,
-				tanggungan boolean
-				PRIMARY KEY  (id)
-				FOREIGN KEY member_id REFERENCES pitka_member(id)
+				tanggungan boolean,
+				PRIMARY KEY  (id),
+				CONSTRAINT `fk_keperluan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 			) $charset_collate;";
 
 			$this->create_pitka_table( $sql );
 		}
 
 		private function create_table_bantuan() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_member_bantuan';
 			$charset_collate = $wpdb->get_charset_collate();
 
@@ -245,17 +253,18 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP
+				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				jenis varchar(255),
-				agency varchar(255)
-				PRIMARY KEY  (id)
-				FOREIGN KEY member_id REFERENCES pitka_member(id)
+				agency varchar(255),
+				PRIMARY KEY  (id),
+				CONSTRAINT `fk_bantuan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 			) $charset_collate;";
 
 			$this->create_pitka_table( $sql );
 		}
 
 		private function create_table_program_received() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_member_program_received';
 			$charset_collate = $wpdb->get_charset_collate();
 
@@ -271,6 +280,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		}
 
 		private function create_table_program_suggested() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_member_program_suggested';
 			$charset_collate = $wpdb->get_charset_collate();
 
@@ -280,15 +290,16 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
-				penganjur varchar(255)
-				PRIMARY KEY  (id)
-				FOREIGN KEY member_id REFERENCES pitka_member(id)
+				penganjur varchar(255),
+				PRIMARY KEY  (id),
+				CONSTRAINT `fk_program_suggested_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 			) $charset_collate;";
 
 			$this->create_pitka_table( $sql );
 		}
 
 		private function create_table_fee() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_fee';
 			$charset_collate = $wpdb->get_charset_collate();
 
@@ -298,7 +309,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				amount decimal(10,2),
-				auto_add boolean
+				auto_add boolean,
 				PRIMARY KEY  (id)
 			) $charset_collate;";
 
@@ -306,6 +317,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		}
 
 		private function create_table_payment() {
+			global $wpdb;
 			$table_name = $wpdb->prefix . 'pitka_member_payment';
 			$charset_collate = $wpdb->get_charset_collate();
 
@@ -315,10 +327,10 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				fee_id mediumint(9),
 				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				paid boolean
-				PRIMARY KEY  (id)
-				FOREIGN KEY member_id REFERENCES pitka_member(id)
-				FOREIGN KEY fee_id REFERENCES pitka_fee(id)
+				paid boolean,
+				PRIMARY KEY  (id),
+				CONSTRAINT `fk_payment_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id),
+				CONSTRAINT `fk_payment_fee` FOREIGN KEY (fee_id) REFERENCES {$wpdb->prefix}pitka_fee (id)
 			) $charset_collate;";
 
 			$this->create_pitka_table( $sql );
@@ -332,16 +344,11 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				$this->create_table_permasalahan();
 				$this->create_table_keperluan();
 				$this->create_table_bantuan();
-				$this->create_table_program();
+				$this->create_table_program_received();
 				$this->create_table_fee();
 				$this->create_table_payment();
-
-				if ( $installed_db_version === false ) {
-					add_option( 'pitka_pendaftaran_db_version', $this->pitka-$pitka_pendaftaran_db_version );
-				} else {
-					update_option( 'pitka_pendaftaran_db_version', $this->pitka-$pitka_pendaftaran_db_version );
-				}
 			}
+			update_option( 'pitka_pendaftaran_db_version', $this->pitka_pendaftaran_db_version );
 		}
 	}
 
