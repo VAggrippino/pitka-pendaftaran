@@ -1,4 +1,4 @@
-.pitka-bp .field {
+.pitka-form .field {
   margin-bottom: 1rem;
   width: 100%;
   max-width: 20rem;
@@ -9,22 +9,22 @@
     margin var(--tspeed);
 }
 
-.pitka-bp .field.hidden {
+.pitka-form .field.hidden {
   max-width: 0;
   max-height: 0;
   margin: 0;
   overflow: hidden;
 }
 
-.pitka-bp .field input,
-.pitka-bp .field select,
-.pitka-bp .field textarea {
+.pitka-form .field input:not([type="checkbox"]),
+.pitka-form .field select,
+.pitka-form .field textarea {
   height: 2rem;
   padding: 0.25rem 0.75rem;
   width: 100%;
 }
 
-.pitka-bp .field input[type=date] {
+.pitka-form .field input[type=date] {
   text-align: center;
 }
 
@@ -145,6 +145,45 @@
   border-color: silver;
 }
 
+.pitka-fees {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.pitka-fees h1 {
+  flex: 100%;
+}
+
+.pitka-fees-current,
+.pitka-fees-form {
+  flex: calc(50% - 13px);
+}
+
+.pitka-fees-current table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.pitka-fees-current th,
+.pitka-fees-current td {
+  border: 1px solid black;
+}
+
+.pitka-fees-separator {
+  flex: 6px;
+  margin: 10px;
+  width: 80%;
+  height: 0px;
+  border-style: solid;
+  border-color: silver;
+  border-width: 0 0 6px 0;
+}
+
 @media (min-width: 42rem) {
   .pitka-bp--question table th {
     font-size: 1rem;
@@ -174,5 +213,16 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
+  }
+
+  .pitka-fees {
+    flex-direction: row;
+  }
+
+  .pitka-fees-separator {
+    width: 0;
+    height: 80vh;
+    border-width: 0 6px 0 0;
+    box-sizing: border-box;
   }
 }
