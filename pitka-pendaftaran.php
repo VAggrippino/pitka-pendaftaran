@@ -41,21 +41,29 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		public function __construct() {
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'register_styles' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ) );
+
 			add_shortcode( 'PITKA-Borang-Pendaftaran', array( $this, 'shortcode' ) );
 			add_action( 'admin_menu', array( $this, 'pitka_membership_menu' ) );
 			register_activation_hook( __FILE__, array( $this, 'create_tables' ) );
 		}
 
+		public static function load_custom_wp_admin_style() {
+			wp_register_style( 'borang-pendaftaran-style', plugins_url( 'css/borang-pendaftaran.css', __FILE__ ) );
+		}
+
 		public static function pitka_membership_menu() {
-			add_menu_page(
+			$membership_menu = add_menu_page(
 				'Membership',
 				'Members',
 				'manage_options',
 				'pitka-membership',
 				array( $this, 'show_members' )
 			);
+			add_action( 'load-' . $membership_menu, array( $this, 'enqueue' ) );
 
-			add_submenu_page(
+			$membership_submenu = add_submenu_page(
 				'pitka-membership',
 				'Members',
 				'All Members',
@@ -63,8 +71,9 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				'pitka-membership',
 				array( $this, 'show_members' )
 			);
+			add_action( 'load-' . $membership_submenu, array( $this, 'enqueue' ) );
 
-			add_submenu_page(
+			$unpaid_submenu = add_submenu_page(
 				'pitka-membership',
 				'Members with Unpaid Fees',
 				'Unpaid Members',
@@ -72,8 +81,9 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				'pitka-membership-unpaid',
 				array( $this, 'show_unpaid_members' )
 			);
+			add_action( 'load-' . $unpaid_submenu, array( $this, 'enqueue' ) );
 
-			add_submenu_page(
+			$new_submenu = add_submenu_page(
 				'pitka-membership',
 				'New Members',
 				'New Members',
@@ -81,8 +91,9 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				'pitka-membership-new',
 				array( $this, 'show_new_members' )
 			);
+			add_action( 'load-' . $new_submenu, array( $this, 'enqueue' ) );
 
-			add_submenu_page(
+			$tools_submenu = add_submenu_page(
 				'pitka-membership',
 				'Membership Tools',
 				'Membership Tools',
@@ -90,8 +101,9 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				'pitka-membership-tools',
 				array( $this, 'show_membership_tools' )
 			);
+			add_action( 'load-' . $tools_submenu, array( $this, 'enqueue' ) );
 
-			add_submenu_page(
+			$settings_submenu = add_submenu_page(
 				'pitka-membership',
 				'Membership Settings',
 				'Membership Settings',
@@ -99,26 +111,47 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				'pitka-membership-settings',
 				array( $this, 'show_membership_settings' )
 			);
+			add_action( 'load-' . $settings_submenu, array( $this, 'enqueue' ) );
+
+			$fees_submenu = add_submenu_page(
+				'pitka-membership',
+				'Membership Fees',
+				'Membership Fees',
+				'manage_options',
+				'pitka-membership-fees',
+				array( $this, 'show_membership_fees' )
+			);
+			add_action( 'load-' . $fees_submenu, array( $this, 'enqueue' ) );
 		}
 
 		public static function show_members() {
+			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership.php' );
 		}
 
 		public static function show_unpaid_members() {
+			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-unpaid.php' );
 		}
 
 		public static function show_new_members() {
+			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-new.php' );
 		}
 
 		public static function show_membership_settings() {
+			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-settings.php' );
 		}
 
 		public static function show_membership_tools() {
+			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-tools.php' );
+		}
+
+		public static function show_membership_fees() {
+			$this->enqueue();
+			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-fees.php' );
 		}
 
 		public static function register_styles() {
@@ -131,11 +164,15 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			wp_register_script( 'fontawesome', 'https://kit.fontawesome.com/6cef02ea94.js' );
 		}
 
-		public static function shortcode() {
+		public static function enqueue() {
 			wp_enqueue_style('borang-pendaftaran-style');
 			wp_enqueue_script('borang-pendaftaran-script');
 			wp_enqueue_script('autoExpandTextarea-script');
 			wp_enqueue_script('fontawesome');
+		}
+
+		public static function shortcode() {
+			$this->enqueue();
 			$pitka_bp_form = file_get_contents( plugins_url( 'form.html', __FILE__ ) );
 			return $pitka_bp_form;
 		}
