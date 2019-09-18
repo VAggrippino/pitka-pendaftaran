@@ -7,7 +7,7 @@ if ( isset( $_POST['action'] ) && 'add-new' === $_POST['action'] ) {
   $amount = $_POST['amount'];
   $auto_add = isset( $_POST['auto_add'] ) ? 1 : 0;
 
-  $field_types = array( '%s', '%s', '%d' );
+  $field_types = array( '%s', '%s', '%f' );
 
   $wpdb->insert( "{$wpdb->prefix}pitka_fee", array(
     'description' => $description,
