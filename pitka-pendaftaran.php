@@ -196,7 +196,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				nama varchar(255) NOT NULL,
 				kad_pengenalan_baru varchar(14),
@@ -233,7 +233,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				sendiri boolean,
@@ -252,7 +252,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				diri boolean,
@@ -272,7 +272,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				diri boolean,
@@ -292,7 +292,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				jenis varchar(255),
 				agency varchar(255),
@@ -311,7 +311,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				penganjur varchar(255),
@@ -327,7 +327,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				penganjur varchar(255),
@@ -345,7 +345,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 			$sql = "CREATE TABLE $table_name (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				description varchar(255),
 				amount decimal(10,2),
@@ -365,7 +365,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
 				member_id mediumint(9),
 				fee_id mediumint(9),
-				create_date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 				paid boolean,
 				PRIMARY KEY  (id),
