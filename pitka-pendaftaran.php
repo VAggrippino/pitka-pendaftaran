@@ -176,6 +176,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		public static function shortcode() {
 			$this->enqueue();
 			$pitka_bp_form = file_get_contents( plugins_url( 'form.html', __FILE__ ) );
+			$pitka_bp_form = str_replace( '{{__PATH__}}', plugins_url( '', __FILE__ ), $pitka_bp_form );
 			return $pitka_bp_form;
 		}
 

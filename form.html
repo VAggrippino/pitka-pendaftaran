@@ -1,4 +1,4 @@
-<form class="pitka-bp pitka-form" action="#" method="post">
+<form class="pitka-bp pitka-form" action="{{__PATH__}}/pitka-membership-create-member.php" method="post">
 	<ol>
 		<section class="pitka-bp--peribadi">
 			<h3 class="section-title">Bahagian A: Maklumat Peribadi Ibu Tunggal</h3>
@@ -8,7 +8,7 @@
 					<li>
 						<div class="field">
 							<label for="nama">Nama:</label>
-							<input type="text" class="nama" id="nama" name="nama">
+							<input type="text" class="nama" id="nama" name="nama" required>
 						</div>
 					</li>
 
@@ -20,6 +20,7 @@
 								name="ic"id="ic"
 								pattern="\d{6}-\d\d-\d{4}"
 								placeholder="######-##-####"
+								required
 							>
 						</div>
 					</li>
@@ -28,7 +29,7 @@
 						<div class="grid">
 							<div class="field">
 								<label for="dob">Tarikh Lahir:</label>
-								<input type="date" name="dob" id="dob">
+								<input type="date" name="dob" id="dob" required>
 							</div>
 							<div class="field">
 								<label for="birthplace">Tempat Lahir:</label>
@@ -40,7 +41,7 @@
 					<li>
 						<div class="field">
 							<label for="address">Alamat Kediaman:</label>
-							<textarea name="address" id="address" class="address auto-expand"></textarea>
+							<textarea name="address" id="address" class="address auto-expand" required></textarea>
 						</div>
 					</li>
 
@@ -768,4 +769,5 @@
 			</li>
 		</section>
 	</ol>
+	<button type="submit" value="submit-new-user" name="action">Submit</button>
 </form>
