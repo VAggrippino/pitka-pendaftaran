@@ -4,20 +4,20 @@
 			<h3 class="section-title">Bahagian A: Maklumat Peribadi Ibu Tunggal</h3>
 			<li class="pitka-bp--question">
 				<p>Maklumat peribadi:</p>
-				<ol class="pitka-bp--question--peribadi">
+				<ol type="a" class="pitka-bp--question--peribadi">
 					<li>
 						<div class="field">
 							<label for="nama">Nama:</label>
-							<input type="text" class="nama" id="nama" name="nama" required>
+							<input type="text" class="nama" id="nama" name="nama" placeholder=" " required>
 						</div>
 					</li>
 
 					<li>
 						<div class="field">
-							<label for="ic">Kad Pengenalan Baru:</label>
+							<label for="kad_pengenalan_baru">Kad Pengenalan Baru:</label>
 							<input
 								type="text"
-								name="ic"id="ic"
+								name="kad_pengenalan_baru"id="kad_pengenalan_baru"
 								pattern="\d{6}-\d\d-\d{4}"
 								placeholder="######-##-####"
 								required
@@ -28,53 +28,53 @@
 					<li class="pitka-bp--question--peribadi--lahir">
 						<div class="grid">
 							<div class="field">
-								<label for="dob">Tarikh Lahir:</label>
-								<input type="date" name="dob" id="dob" required>
+								<label for="tarikh_lahir">Tarikh Lahir:</label>
+								<input type="date" name="tarikh_lahir" id="tarikh_lahir" required>
 							</div>
 							<div class="field">
-								<label for="birthplace">Tempat Lahir:</label>
-								<textarea class="auto-expand" name="birthplace" id="birthplace"></textarea>
+								<label for="tempat_lahir">Tempat Lahir:</label>
+								<textarea class="auto-expand" name="tempat_lahir" id="tempat_lahir"></textarea>
 							</div>
 						</div>
 					</li>
 
 					<li>
 						<div class="field">
-							<label for="address">Alamat Kediaman:</label>
-							<textarea name="address" id="address" class="address auto-expand" required></textarea>
+							<label for="alamat_kediaman">Alamat Kediaman:</label>
+							<textarea name="alamat_kediaman" id="alamat_kediaman" class="address auto-expand" required></textarea>
 						</div>
 					</li>
 
 					<li class="pitka-bp--question--peribadi--telefon">
 						<div class="grid">
 							<div class="field">
-								<label for="workPhone">No. Telefon Pejabat:</label>
+								<label for="telefon_pejabat">No. Telefon Pejabat:</label>
 								<input
 									type="tel"
-									name="workPhone"
-									id="workPhone"
+									name="telefon_pejabat"
+									id="telefon_pejabat"
 									pattern="\d{2,3}-\d+"
 									placeholder="###-#######"
 								>
 							</div>
 
 							<div class="field">
-								<label for="homePhone">No. Telefon Rumah:</label>
+								<label for="telefon_rumah">No. Telefon Rumah:</label>
 								<input
 									type="tel"
-									name="homePhone"
-									id="homePhone"
+									name="telefon_rumah"
+									id="telefon_rumah"
 									pattern="\d{2,3}-\d+"
 									placeholder="###-#######"
 								>
 							</div>
 
 							<div class="field">
-								<label for="mobilePhone">No. Telefon Bimbit:</label>
+								<label for="telefon_bimbit">No. Telefon Bimbit:</label>
 								<input
 									type="tel"
-									name="mobilePhone"
-									id="mobilePhone"
+									name="telefon_bimbit"
+									id="telefon_bimbit"
 									pattern="\d{2,3}-\d+"
 									placeholder="###-#######"
 								>
@@ -83,26 +83,11 @@
 					</li>
 				</ol>
 			</li>
-        
-			<li class="pitka-bp--question">
-				<div class="field">
-					<label for="age">Umur:</label>
-					<select name="age" id="age">
-						<option>-- Sila Pilih Satu --</option>
-						<option value="18-20">18 tahun - 20 tahun</option>
-						<option value="21-30">21 tahun - 30 tahun</option>
-						<option value="31-40">31 tahun - 40 tahun</option>
-						<option value="41-50">41 tahun - 50 tahun</option>
-						<option value="51-60">51 tahun - 60 tahun</option>
-						<option value="61+">61 tahun dan ke atas</option>
-					</select>
-				</div>
-			</li>
 						
 			<li class="pitka-bp--question">
 				<div class="field">
 					<label for="bangsa">Bangsa:</label>
-					<select name="bangsa" id="bangsa" onchange='showOtherField(this, `other`, `field--bangsa--other`)'>
+					<select name="bangsa" class="noprint" id="bangsa" onchange='showOtherField(this, `other`, `field--bangsa--other`)'>
 						<option value="">-- Sila Pilih Satu --</option>
 						<option value="Melayu">Melayu</option>
 						<option value="Kadazan / Dusun">Kadazan / Dusun</option>
@@ -110,6 +95,36 @@
 						<option value="India">India</option>
 						<option value="other">Lain-lain (sila nyatakan)</option>
 					</select>
+
+					<div class="onlyprint bangsa">
+						<table>
+							<tr>
+								<td>Melayu</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Kadazan / Dusun</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Cina</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>India</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Lain-lain (sila nyatakan)</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td><input type="text"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 				<div class="field hidden" id="field--bangsa--other">
 					<input type="text" name="bangsa-other" disabled>
@@ -119,7 +134,7 @@
 			<li class="pitka-bp--question">
 				<div class="field">
 					<label for="agama">Agama:</label>
-					<select name="agama" id="agama" onchange='showOtherField(this, `other`, `field--agama--other`)'>
+					<select name="agama" class="noprint" id="agama" onchange='showOtherField(this, `other`, `field--agama--other`)'>
 						<option value="">-- Sila Pilih Satu --</option>
 						<option value="Islam">Islam</option>
 						<option value="Kristian">Kristian</option>
@@ -127,6 +142,36 @@
 						<option value="Hindu">Hindu</option>
 						<option value="other">Lain-lain (sila nyatakan)</option>
 					</select>
+
+					<div class="onlyprint agama">
+						<table>
+							<tr>
+								<td>Islam</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Kristian</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Buddha</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Hindu</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Lain-lain (sila nyatakan)</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td><input type="text"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 				<div class="field hidden" id="field--agama--other">
 					<input type="text" name="agama-other" disabled>
@@ -135,43 +180,38 @@
 							
 			<li class="pitka-bp--question">
 				<p>Maklumat Pekerjaan:</p>
-				<ol class="pitka-bp--pekerjaan">
+				<ol type="a" class="pitka-bp--pekerjaan">
 					<li>
 						<div class="field">
-							<label for="pekerjaan--jenis">
+							<label for="jenis_pekerjaan">
 								Jenis Pekerjaan
 								(Kerajaan / Badan Berkanun / Swasta):
 							</label>
-							<input type="text" name="pekerjaan--jenis" id="pekerjaan--jenis">
+							<input type="text" name="jenis_pekerjaan" id="jenis_pekerjaan">
 						</div>
 					</li>
 									
 					<li>
 						<div class="field">
-							<label for="pekerjaan--jawatan">Jawatan:</label>
-							<input
-								type="text"
-								name="pekerjaan--jawatan"
-								id="pekerjaan--jawatan"
-							>
+							<label for="jawatan">Jawatan:</label>
+							<input type="text" name="jawatan" id="jawatan">
 						</div>
 					</li>
 					
 					<li>
 						<div class="field">
-							<label for="pekerjaan--organisasi-nama">Nama Organisasi:</label>
-							<input type="text" name="pekerjaan--organisasi-nama">
+							<label for="nama_pekerja">Nama Organisasi:</label>
+							<input type="text" name="nama_pekerja" id="nama_pekerja">
 						</div>
 					</li>
 		
 					<li>
 						<div class="field">
-							<label for="pekerjaan--organisasi-alamat">Alamat Organisasi:</label>
+							<label for="alamat_pekerja">Alamat Organisasi:</label>
 							<textarea
-								name="pekerjaan--organisasi-alamat"
-								id="pekerjaan--organisasi-alamat"
-								class="auto-expand"
-							></textarea>
+								name="alamat_pekerja"
+								id="alamat_pekerja"
+								class="auto-expand"></textarea>
 						</div>
 					</li>
 				</ol>
@@ -179,8 +219,8 @@
         
 			<li class="pitka-bp--question">
 				<div class="field">
-					<label for="pendapatan">Tingkat Pendapatan:</label>
-					<select name="pendapatan" id="pendapatan">
+					<label for="tingkat_pendapatan">Tingkat Pendapatan:</label>
+					<select class="noprint" name="tingkat_pendapatan" id="tingkat_pendapatan">
 						<option value="">-- Sila Pilih Satu --</option>
 						<option value="<500">Kurang dari RM500</option>
 						<option value="501-750">RM501 - RM750</option>
@@ -193,18 +233,87 @@
 						<option value="1801-2000">RM1801 - RM2000</option>
 						<option value=">2000">Lebih dari RM2000</option>
 					</select>
+					<div class="onlyprint pendapatan">
+						<table>
+							<tr>
+								<td>Kurang dari RM500</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>RM501 - RM750</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>RM750 - RM800</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>RM801 - RM1000</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>RM1001 - RM1200</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>RM1201 - RM1400</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>RM1401 - RM1600</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>RM1601 - RM1800</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>RM1801 - RM2000</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+							<tr>
+								<td>Lebih dari RM2000</td>
+								<td><div class="fake-checkbox"></div></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</li>
 							
 			<li class="pitka-bp--question">
 				<div class="field">
-					<label for="faktor">Faktor Menjadi Ibu Tunggal:</label>
-					<select name="faktor" id="faktor" onchange="showOtherField(this, `other`, `field--faktor--other`)">
+					<label for="faktor_menjadi_ibu_tunggal">Faktor Menjadi Ibu Tunggal:</label>
+					<select
+						class="noprint"
+						name="faktor_menjadi_ibu_tunggal"
+						id="faktor_menjadi_ibu_tunggal"
+						onchange="showOtherField(this, `other`, `field--faktor--other`)"
+					>
 						<option value="">-- Sila Pilih Satu --</option>
 						<option value="Kematian Suami">Kematian Suami</option>
 						<option value="Perceraian">Perceraian</option>
 						<option value="other">Lain-lain (sila nyatakan)</option>
 					</select>
+
+					<div class="onlyprint faktor">
+						<table>
+							<tr>
+								<td>Kematian Suami</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Perceraian</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Lain-lain (sila nyatakan)</td>
+								<td><div class="fake-checkbox"></div></td>
+								<td><input type="text"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 				<div class="field hidden" id="field--faktor--other">
 					<input type="text" name="faktor-other" disabled>
@@ -254,36 +363,48 @@
 				<ol>
 					<li>
 						<div class="field">
-							<label for="tanggungan--bilangan">Bilangan Tanggungan:</label>
-							<input type="number" name="tanggungan--bilangan" id="tanggungan--bilangan">
+							<label for="bilangan_tanggungan">Bilangan Tanggungan:</label>
+							<input type="number" name="bilangan_tanggungan" id="bilangan_tanggungan">
 						</div>
 					</li>
 						
 					<li>
 						<div class="field">
-							<label for="tanggungan--anak-bersekolah">Bilangan Anak Bersekolah:</label>
-							<input type="number" name="tanggungan--anak-bersekolah" id="tanggungan--anak-bersekolah">
+							<label for="bilangan_anak_bersekolah">Bilangan Anak Bersekolah:</label>
+							<input
+								type="number"
+								name="bilangan_anak_bersekolahh"
+								id="bilangan_anak_bersekolah"
+							>
 						</div>
 					</li>
 						
 					<li>
 						<div class="field">
-							<label for="tanggungan--anak-berkerja">Bilangan Anak Bekerja:</label>
-							<input type="number" name="tanggungan--anak-berkerja" id="tanggungan--anak-berkerja">
+							<label for="bilangan_anak_bekerja">Bilangan Anak Bekerja:</label>
+							<input
+								type="number"
+								name="bilangan_anak_bekerja"
+								id="bilangan_anak_bekerja"
+							>
 						</div>
 					</li>
 			
 					<li>
 						<div class="field">
-							<label for="tanggungan--pekerjaan-anak">Pekerjaan Anak:</label>
-							<input type="text" name="tanggungan--pekerjaan-anak" id="tanggungan--pekerjaan-anak">
+							<label for="pekerjaan_anak">Pekerjaan Anak:</label>
+							<input type="text" name="pekerjaan_anak" id="pekerjaan_anak">
 						</div>
 					</li>
             
 					<li>
 						<div class="field">
-							<label for="tanggungan--anak-menganggur">Bilangan Anak Menganggur:</label>
-							<input type="number" name="tanggungan--anak-menganggur" id="tanggungan--anak-menganggur">
+							<label for="bilangan_anak_menganggur">Bilangan Anak Menganggur:</label>
+							<input
+								type="number"
+								name="bilangan_anak_menganggur"
+								id="bilangan_anak_menganggur"
+							>
 						</div>
 					</li>
 				</ol>

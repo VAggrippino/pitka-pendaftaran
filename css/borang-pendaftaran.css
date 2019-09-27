@@ -1,3 +1,7 @@
+.onlyprint {
+  display: none;
+}
+
 .pitka-form .field {
   margin-bottom: 1rem;
   width: 100%;
@@ -16,7 +20,7 @@
   overflow: hidden;
 }
 
-.pitka-form .field input:not([type="checkbox"]),
+.pitka-form .field input,
 .pitka-form .field select,
 .pitka-form .field textarea {
   height: 2rem;
@@ -184,7 +188,7 @@
   border-width: 0 0 6px 0;
 }
 
-@media (min-width: 42rem) {
+@media screen and (min-width: 42rem) {
   .pitka-bp--question table th {
     font-size: 1rem;
   }
@@ -200,6 +204,7 @@
   }
 
   .pitka-bp--question--peribadi--lahir > .grid {
+    color: blue;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2em;
@@ -224,5 +229,159 @@
     height: 80vh;
     border-width: 0 6px 0 0;
     box-sizing: border-box;
+  }
+}
+
+@media print {
+  .newpage {
+    break-before: page;
+  }
+
+  .noprint {
+    display: none;
+  }
+
+  .onlyprint {
+    display: block;
+  }
+
+  *::placeholder {
+    color: transparent;
+  }
+
+  header#masthead {
+    display: none;
+  }
+
+  .page-content > h2,
+  .page-content > h3 {
+    text-align: center;
+    margin: 0;
+  }
+
+  .pitka-form .field {
+    max-height: none;
+    max-width: none;
+    display: flex;
+  }
+
+  .pitka-form .field {
+    --field-height: 1.75em;
+  }
+
+  .pitka-form .fake-checkbox {
+    --checkbox-size: 1.25em;
+    display: inline-block;
+    height: var(--checkbox-size);
+    width: var(--checkbox-size);
+    border: 2px solid black;
+    position: relative;
+    bottom: -0.4em;
+  }
+
+  .pitka-form .field input,
+  .pitka-form .field input,
+  .pitka-form .field textarea {
+    border: 2px solid black;
+  }
+
+  .pitka-form .field input:placeholder-shown,
+  .pitka-form .field input:not(:valid),
+  .pitka-form .field textarea:placeholder-shown {
+    color: transparent !important;
+  }
+
+  .pitka-form .field input {
+    height: var(--field-height);
+  }
+
+  .pitka-form .field input[type="text"]:placeholder-shown {
+    background-image: repeating-linear-gradient(
+      90deg,
+      white,
+      white calc( var(--field-height) * 0.9 ),
+      silver calc( var(--field-height) * 0.9 ),
+      silver calc( (var(--field-height) * 0.9) + 2px)
+    ) !important;
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .pitka-form .field input[type="date"]:not(:valid) {
+    background-image: linear-gradient(
+      -65deg,
+      white,
+      white 33%,
+      black 33%,
+      black calc(33% + 2px),
+      white calc(33% + 2px),
+      white 66%,
+      black 66%,
+      black calc(66% + 2px),
+      white calc(66% + 2px)
+    ) !important;
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    background-clip: content-box !important;
+  }
+
+  .pitka-form .field label {
+    white-space: nowrap;
+    margin-right: 2em;
+    line-height: var(--field-height);
+  }
+
+  .pitka-bp--question--peribadi--lahir .grid,
+  .pitka-bp--question--peribadi--telefon .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1em;
+  }
+
+  .pitka-form .field textarea {
+    height: 8em;
+    background-image: repeating-linear-gradient(
+      white,
+      white calc( var(--field-height) * 0.9 ),
+      silver calc( var(--field-height) * 0.9 ),
+      silver calc( (var(--field-height) * 0.9) + 2px)
+    ) !important;
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .pitka-form .field .onlyprint table {
+    width: auto;
+  }
+
+  .pitka-form .field .onlyprint td {
+    vertical-align: middle;
+    padding: 0 1rem;
+  }
+
+  .pitka-form .field .onlyprint input[type="text"] {
+    border: 2px solid black;
+    margin: 0.25em 0.5em;
+  }
+
+  button[type="submit"] { display: none; }
+  .widget-area {
+    display: none;
+  }
+  .site-footer,
+  .site-info-wrapper {
+    display: none;
+  }
+
+  table th, table td {
+    border: 1px solid black !important;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  h3.section-title {
+    font-size: 1rem;
   }
 }
