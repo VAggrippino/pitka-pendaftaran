@@ -7,9 +7,15 @@ if ( isset( $_POST['action'] ) && 'add-new' === $_POST['action'] ) {
   $amount = $_POST['amount'];
   $auto_add = isset( $_POST['auto_add'] ) ? 1 : 0;
 
-  $field_types = array( '%s', '%s', '%f' );
+  $field_types = array(
+    '%s', // create_date
+    '%s', // description
+    '%f', // amount
+    '%d', // auto_add
+  );
 
   $wpdb->insert( "{$wpdb->prefix}pitka_fee", array(
+    'create_date' => current_time( 'mysql', 0 ),
     'description' => $description,
     'amount' => $amount,
     'auto_add' => $auto_add
@@ -27,10 +33,12 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
         <th>Description</th>
         <th>Amount</th>
         <th>Automatic</th>
+        <th>Created</th>
+        <th>Modified</th>
       </tr>
 			<?php
 			if ( 0 === count($fees) ) {
-				echo "<tr><td colspan='3'>No records found.</td></tr>";
+				echo "<tr><td colspan='5'>No records found.</td></tr>";
 			}
 			foreach ( $fees as $fee ) {
 				echo "<tr>";
@@ -42,10 +50,9 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
 					echo "checked";
 				}
         echo "></td>";
-        /*
-        echo "<td>{$fee->auto_add}</td>";
-        echo "</tr>";
-        */
+
+        echo "<td>{$fee->create_date}</td>";
+        echo "<td>{$fee->update_date}</td>";
 			}
 			?>
 		</table>
