@@ -239,6 +239,13 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 						'tanggungan' => 'masalah--tanggungan',
 					);
 					$this->add_items( 'pitka_member_permasalahan', $member_id, $permasalahan_fields, $_POST );
+
+					$keperluan_fields = array(
+						'description' => 'keperluan--description',
+						'diri' => 'keperluan--diri',
+						'tanggungan' => 'keperluan--tanggungan',
+					);
+					$this->add_items( 'pitka_member_keperluan', $member_id, $keperluan_fields, $_POST );
 				}
 			}
 		}
