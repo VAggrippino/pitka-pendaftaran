@@ -39,21 +39,25 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		var $pitka_pendaftaran_db_version = '1.0.0';
 
 		public function __construct() {
+			// Handle a Pendaftaran form submission after WP page init
+			add_action( 'init', array( $this, 'handle_form' ) );
+
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_styles' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'register_styles' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ) );
 
 			add_shortcode( 'PITKA-Borang-Pendaftaran', array( $this, 'shortcode' ) );
+
 			add_action( 'admin_menu', array( $this, 'pitka_membership_menu' ) );
 			register_activation_hook( __FILE__, array( $this, 'create_tables' ) );
 		}
 
-		public static function load_custom_wp_admin_style() {
+		public function load_custom_wp_admin_style() {
 			wp_register_style( 'borang-pendaftaran-style', plugins_url( 'css/borang-pendaftaran.css', __FILE__ ) );
 		}
 
-		public static function pitka_membership_menu() {
+		public function pitka_membership_menu() {
 			$membership_menu = add_menu_page(
 				'Membership',
 				'Members',
@@ -124,41 +128,41 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			add_action( 'load-' . $fees_submenu, array( $this, 'enqueue' ) );
 		}
 
-		public static function show_members() {
+		public function show_members() {
 			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership.php' );
 		}
 
-		public static function show_unpaid_members() {
+		public function show_unpaid_members() {
 			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-unpaid.php' );
 		}
 
-		public static function show_new_members() {
+		public function show_new_members() {
 			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-new.php' );
 		}
 
-		public static function show_membership_settings() {
+		public function show_membership_settings() {
 			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-settings.php' );
 		}
 
-		public static function show_membership_tools() {
+		public function show_membership_tools() {
 			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-tools.php' );
 		}
 
-		public static function show_membership_fees() {
+		public function show_membership_fees() {
 			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-fees.php' );
 		}
 
-		public static function register_styles() {
+		public function register_styles() {
 			wp_register_style( 'borang-pendaftaran-style', plugins_url( 'css/borang-pendaftaran.css', __FILE__ ) );
 		}
 
-		public static function register_scripts() {
+		public function register_scripts() {
 			wp_register_script( 'borang-pendaftaran-script', plugins_url( 'js/borang-pendaftaran.js', __FILE__ ) );
 			wp_register_script( 'autoExpandTextarea-script', plugins_url( 'js/autoExpandTextarea.js', __FILE__ ) );
 			wp_register_script( 'autoFormatCurrency-script', plugins_url( 'js/autoFormatCurrency.js', __FILE__ ) );
@@ -166,7 +170,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			wp_register_script( 'fontawesome', 'https://kit.fontawesome.com/6cef02ea94.js' );
 		}
 
-		public static function enqueue() {
+		public function enqueue() {
 			wp_enqueue_style('borang-pendaftaran-style');
 			wp_enqueue_script('borang-pendaftaran-script');
 			wp_enqueue_script('autoExpandTextarea-script');
@@ -175,11 +179,40 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			wp_enqueue_script('fontawesome');
 		}
 
-		public static function shortcode() {
+		/**
+		 * Process and return the registration form.
+		 * 
+		 * 1. Enqueue the plugin style & JavaScript.
+		 * 2. Read in the HTML form.
+		 * 3. Replace template-like strings with the related values.
+		 * 
+		 *  @return string The full HTML of the pendaftaran form.
+		 */
+		public function shortcode() {
 			$this->enqueue();
+			$nonce_field = wp_nonce_field( 'process_pitka_pendaftaran', 'pitka_pendaftaran_nonce', false );
 			$pitka_bp_form = file_get_contents( plugins_url( 'form.html', __FILE__ ) );
-			$pitka_bp_form = str_replace( '{{__PATH__}}', plugins_url( '', __FILE__ ), $pitka_bp_form );
+			$pitka_bp_form = str_replace( '{{__NONCE_FIELD__}}', $nonce_field, $pitka_bp_form );
 			return $pitka_bp_form;
+		}
+
+		/**
+		 * Handle PITKA Pendaftaran form submission.
+		 * 
+		 * 1. Check the WordPress generated nonce
+		 * 2. Create user
+		 * 3. Add assets
+		 * 
+		 */
+		public function handle_form() {
+			if ( !empty( $_POST['pitka_pendaftaran_nonce'] ) ) {
+				if ( !wp_verify_nonce( $_POST['pitka_pendaftaran_nonce'], 'process_pitka_pendaftaran' ) ) {
+					die( 'You are not authorized to perform this action.' );
+				} else {
+					$new_member_id = $this->create_member( $_POST );
+					$this->add_assets( $new_member_id, $_POST );
+				}
+			}
 		}
 
 		private function create_pitka_table( $sql ) {
@@ -378,7 +411,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$this->create_pitka_table( $sql );
 		}
 
-		public static function create_tables() {
+		public function create_tables() {
 			$installed_db_version = get_option( 'pitka_pendaftaran_db_version' );
 			if ( $installed_db_version !== $this->pitka_pendaftaran_db_version ) {
 				$this->create_table_member();
@@ -391,6 +424,106 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				$this->create_table_payment();
 			}
 			update_option( 'pitka_pendaftaran_db_version', $this->pitka_pendaftaran_db_version );
+		}
+
+		/**
+		 * Create user in the database.
+		 * 
+		 * @param array $user_data Data for a new user to be added to the database.
+		 * @return int Insert ID generated by the database.
+		 * 
+		 */
+		private function create_member( $member_data ) {
+			global $wpdb;
+			$result = $wpdb->insert( "{$wpdb->prefix}pitka_member", array(
+				'create_date' => current_time( 'mysql', 0 ),
+				'nama' => $member_data['nama'],
+				'kad_pengenalan_baru' => $member_data['kad_pengenalan_baru'],
+				'tarikh_lahir' => $member_data['tarikh_lahir'],
+				'tempat_lahir' => $member_data['tempat_lahir'],
+				'alamat_kediaman' => $member_data['alamat_kediaman'],
+				'telefon_pejabat' => $member_data['telefon_pejabat'],
+				'telefon_rumah' => $member_data['telefon_rumah'],
+				'telefon_bimbit' => $member_data['telefon_rumah'],
+				'bangsa' => $member_data['bangsa'],
+				'agama' => $member_data['agama'],
+				'jenis_pekerjaan' => $member_data['jenis_pekerjaan'],
+				'jawatan' => $member_data['jawatan'],
+				'nama_pekerja' => $member_data['nama_pekerja'],
+				'alamat_pekerja' => $member_data['alamat_pekerja'],
+				'tingkat_pendapatan' => $member_data['tingkat_pendapatan'],
+				'faktor_menjadi_ibu_tunggal' => $member_data['faktor_menjadi_ibu_tunggal'],
+				'bilangan_tanggungan' => $member_data['bilangan_tanggungan'],
+				'bilangan_anak_bersekolah' => $member_data['bilangan_anak_bersekolah'],
+				'bilangan_anak_bekerja' => $member_data['bilangan_anak_bekerja'],
+				'pekerjaan_anak' => $member_data['pekerjaan_anak'],
+				'bilangan_anak_menganggur' => $member_data['bilangan_anak_menganggur']
+			) );
+
+			if ( false === $result ) {
+				die(
+					'<strong>Error</strong>:<br>' .
+					$wpdb->last_error .
+					"<br>Please contact PITKA directly or PITKA Technical Support."
+				);
+			}
+
+			return $wpdb->insert_id;
+		}
+
+		/**
+		 * Insert user assets into the database.
+		 * 
+		 * @param string $user_id User ID generated by the database upon creation.
+		 * @param array $user_data Data for a new user to be added to the database.
+		 * 
+		 */
+		private function add_assets( $member_id, $member_data ) {
+
+			$assets = array();
+			$asset_index = 0;
+
+			$is_description = function( $field_name ) {
+				$description_prefix = 'aset--description';
+				return strncmp( $description_prefix, $field_name, strlen( $description_prefix ) ) === 0;
+			};
+
+			$is_sendiri = function( $field_name ) {
+				$sendiri_prefix = 'aset--sendiri';
+				return strncmp( $sendiri_prefix, $field_name, strlen( $sendiri_prefix ) ) === 0;
+			};
+
+			foreach( $member_data as $key => $value ) {
+				if ( $is_description( $key ) ) {
+					if ( array_key_exists( $asset_index, $assets ) ) {
+						$asset_index = $asset_index + 1;
+					}
+
+					$assets[$asset_index]['description'] = $value;
+				}
+
+				if ( $is_sendiri( $key ) ) {
+					$assets[$asset_index]['sendiri'] = $value;
+				}
+			}
+
+			global $wpdb;
+			foreach ( $assets as $asset ) {
+				$result = $wpdb->insert( "{$wpdb->prefix}pitka_member_aset", array(
+					'member_id' => $member_id,
+					'create_date' => current_time( 'mysql', 0 ),
+					'description' => $asset['description'],
+					'sendiri' => $asset['sendiri'],
+				) );
+
+				if ( false === $result ) {
+					die(
+						'<strong>Error</strong>:<br>' .
+						$wpdb->last_error .
+						"<br>Please contact PITKA directly or PITKA Technical Support."
+					);
+				}
+			}
 		}
 	}
 
