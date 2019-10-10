@@ -250,215 +250,140 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			}
 		}
 
-		private function create_pitka_table( $sql ) {
+		private function create_pitka_table( $table_name, $fields ) {
 			global $wpdb;
 
-			$result = $wpdb->query( $sql );
+			$table = $wpdb->prefix . $table_name;
+			$charset_collate = $wpdb->get_charset_collate();
+
+			error_log( "Creating '$table' table..." );
+			$result = $wpdb->query( "CREATE TABLE $table ( $fields ) $charset_collate;" );
 			if ( false === $result ) {
-				die( $wpdb->last_error );
+				die( "Error while attempting to create '{$table}' table.\n{$wpdb->last_error}" );
 			}
-		}
-
-		private function create_table_member() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_member';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				nama varchar(255) NOT NULL,
-				kad_pengenalan_baru varchar(14),
-				tarikh_lahir date,
-				tempat_lahir varchar(255),
-				alamat_kediaman varchar(255),
-				telefon_pejabat varchar(15),
-				telefon_rumah varchar(15),
-				telefon_bimbit varchar(15),
-				bangsa varchar(30),
-				agama varchar(30),
-				jenis_pekerjaan varchar(255),
-				jawatan varchar(255),
-				nama_pekerja varchar(255),
-				alamat_pekerja varchar(255),
-				tingkat_pendapatan varchar(10),
-				faktor_menjadi_ibu_tunggal varchar(20),
-				bilangan_tanggungan tinyint,
-				bilangan_anak_bersekolah tinyint,
-				bilangan_anak_bekerja tinyint,
-				pekerjaan_anak varchar(255),
-				bilangan_anak_menganggur tinyint,
-				PRIMARY KEY  (id)
-			) $charset_collate;";
-
-			$this->create_pitka_table( $sql );
-		}
-
-		private function create_table_aset() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_member_aset';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				member_id mediumint(9),
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				description varchar(255),
-				sendiri boolean,
-				PRIMARY KEY  (id),
-				CONSTRAINT `fk_aset_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
-			) $charset_collate;";
-
-			$this->create_pitka_table( $sql );
-		}
-
-		private function create_table_permasalahan() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_member_permasalahan';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				member_id mediumint(9),
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				description varchar(255),
-				diri boolean,
-				tanggungan boolean,
-				PRIMARY KEY  (id),
-				CONSTRAINT `fk_permasalahan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
-			) $charset_collate;";
-
-			$this->create_pitka_table( $sql );
-		}
-
-		private function create_table_keperluan() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_member_keperluan';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				member_id mediumint(9),
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				description varchar(255),
-				diri boolean,
-				tanggungan boolean,
-				PRIMARY KEY  (id),
-				CONSTRAINT `fk_keperluan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
-			) $charset_collate;";
-
-			$this->create_pitka_table( $sql );
-		}
-
-		private function create_table_bantuan() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_member_bantuan';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				member_id mediumint(9),
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				jenis varchar(255),
-				agency varchar(255),
-				PRIMARY KEY  (id),
-				CONSTRAINT `fk_bantuan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
-			) $charset_collate;";
-
-			$this->create_pitka_table( $sql );
-		}
-
-		private function create_table_program_received() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_member_program_received';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				member_id mediumint(9),
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				description varchar(255),
-				penganjur varchar(255),
-				penilaian tinyint(1)
-			) $charset_collate;";
-		}
-
-		private function create_table_program_suggested() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_member_program_suggested';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				member_id mediumint(9),
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				description varchar(255),
-				penganjur varchar(255),
-				PRIMARY KEY  (id),
-				CONSTRAINT `fk_program_suggested_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
-			) $charset_collate;";
-
-			$this->create_pitka_table( $sql );
-		}
-
-		private function create_table_fee() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_fee';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				description varchar(255),
-				amount decimal(10,2),
-				auto_add boolean,
-				PRIMARY KEY  (id)
-			) $charset_collate;";
-
-			$this->create_pitka_table( $sql );
-		}
-
-		private function create_table_payment() {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'pitka_member_payment';
-			$charset_collate = $wpdb->get_charset_collate();
-
-			$sql = "CREATE TABLE $table_name (
-				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				member_id mediumint(9),
-				fee_id mediumint(9),
-				create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
-				update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-				paid boolean,
-				PRIMARY KEY  (id),
-				CONSTRAINT `fk_payment_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id),
-				CONSTRAINT `fk_payment_fee` FOREIGN KEY (fee_id) REFERENCES {$wpdb->prefix}pitka_fee (id)
-			) $charset_collate;";
-
-			$this->create_pitka_table( $sql );
 		}
 
 		public function create_tables() {
-			$installed_db_version = get_option( 'pitka_pendaftaran_db_version' );
-			if ( $installed_db_version !== $this->pitka_pendaftaran_db_version ) {
-				$this->create_table_member();
-				$this->create_table_aset();
-				$this->create_table_permasalahan();
-				$this->create_table_keperluan();
-				$this->create_table_bantuan();
-				$this->create_table_program_received();
-				$this->create_table_fee();
-				$this->create_table_payment();
+			global $wpdb;
+			$tables = array(
+				'pitka_member' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					nama varchar(255) NOT NULL,
+					kad_pengenalan_baru varchar(14),
+					tarikh_lahir date,
+					tempat_lahir varchar(255),
+					alamat_kediaman varchar(255),
+					telefon_pejabat varchar(15),
+					telefon_rumah varchar(15),
+					telefon_bimbit varchar(15),
+					bangsa varchar(30),
+					agama varchar(30),
+					jenis_pekerjaan varchar(255),
+					jawatan varchar(255),
+					nama_pekerja varchar(255),
+					alamat_pekerja varchar(255),
+					tingkat_pendapatan varchar(10),
+					faktor_menjadi_ibu_tunggal varchar(20),
+					bilangan_tanggungan tinyint,
+					bilangan_anak_bersekolah tinyint,
+					bilangan_anak_bekerja tinyint,
+					pekerjaan_anak varchar(255),
+					bilangan_anak_menganggur tinyint,
+					PRIMARY KEY  (id)
+				",
+				'pitka_member_aset' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					member_id mediumint(9),
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					description varchar(255),
+					sendiri boolean,
+					PRIMARY KEY  (id),
+					CONSTRAINT `fk_aset_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+				",
+				'pitka_member_permasalahan' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					member_id mediumint(9),
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					description varchar(255),
+					diri boolean,
+					tanggungan boolean,
+					PRIMARY KEY  (id),
+					CONSTRAINT `fk_permasalahan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+				",
+				'pitka_member_keperluan' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					member_id mediumint(9),
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					description varchar(255),
+					diri boolean,
+					tanggungan boolean,
+					PRIMARY KEY  (id),
+					CONSTRAINT `fk_keperluan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+				",
+				'pitka_member_bantuan' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					member_id mediumint(9),
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					jenis varchar(255),
+					agency varchar(255),
+					PRIMARY KEY  (id),
+					CONSTRAINT `fk_bantuan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+				",
+				'pitka_member_program_received' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					member_id mediumint(9),
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					description varchar(255),
+					penganjur varchar(255),
+					penilaian tinyint(1),
+					PRIMARY KEY  (id),
+					CONSTRAINT `fk_program_received_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+				",
+				'pitka_member_program_suggested' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					member_id mediumint(9),
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					description varchar(255),
+					penganjur varchar(255),
+					PRIMARY KEY  (id),
+					CONSTRAINT `fk_program_suggested_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+				",
+				'pitka_fee' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					description varchar(255),
+					amount decimal(10,2),
+					auto_add boolean,
+					PRIMARY KEY  (id)
+				",
+				'pitka_member_payment' => "
+					id mediumint(9) NOT NULL AUTO_INCREMENT,
+					member_id mediumint(9),
+					fee_id mediumint(9),
+					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
+					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
+					paid boolean,
+					PRIMARY KEY  (id),
+					CONSTRAINT `fk_payment_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id),
+					CONSTRAINT `fk_payment_fee` FOREIGN KEY (fee_id) REFERENCES {$wpdb->prefix}pitka_fee (id)
+				",
+			);
+
+			foreach ( $tables as $table_name => $fields ) {
+				$this->create_pitka_table( $table_name, $fields );
 			}
-			update_option( 'pitka_pendaftaran_db_version', $this->pitka_pendaftaran_db_version );
+
+			$installed_db_version = get_option( 'pitka_pendaftaran_db_version' );
+			//update_option( 'pitka_pendaftaran_db_version', $this->pitka_pendaftaran_db_version );
 		}
 
 		/**
