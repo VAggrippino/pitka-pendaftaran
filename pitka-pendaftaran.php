@@ -324,38 +324,42 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					bilangan_anak_menganggur tinyint,
 					PRIMARY KEY  (id)
 				",
+
 				'pitka_member_aset' => "
 					id mediumint(9) NOT NULL AUTO_INCREMENT,
 					member_id mediumint(9),
 					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 					description varchar(255),
-					sendiri boolean,
+					sendiri boolean DEFAULT 0,
 					PRIMARY KEY  (id),
 					CONSTRAINT `fk_aset_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 				",
+
 				'pitka_member_permasalahan' => "
 					id mediumint(9) NOT NULL AUTO_INCREMENT,
 					member_id mediumint(9),
 					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 					description varchar(255),
-					diri boolean,
-					tanggungan boolean,
+					diri boolean DEFAULT 0,
+					tanggungan boolean DEFAULT 0,
 					PRIMARY KEY  (id),
 					CONSTRAINT `fk_permasalahan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 				",
+
 				'pitka_member_keperluan' => "
 					id mediumint(9) NOT NULL AUTO_INCREMENT,
 					member_id mediumint(9),
 					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 					description varchar(255),
-					diri boolean,
-					tanggungan boolean,
+					diri boolean DEFAULT 0,
+					tanggungan boolean DEFAULT 0,
 					PRIMARY KEY  (id),
 					CONSTRAINT `fk_keperluan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 				",
+
 				'pitka_member_bantuan' => "
 					id mediumint(9) NOT NULL AUTO_INCREMENT,
 					member_id mediumint(9),
@@ -366,6 +370,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					PRIMARY KEY  (id),
 					CONSTRAINT `fk_bantuan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 				",
+
 				'pitka_member_program_received' => "
 					id mediumint(9) NOT NULL AUTO_INCREMENT,
 					member_id mediumint(9),
@@ -377,32 +382,36 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					PRIMARY KEY  (id),
 					CONSTRAINT `fk_program_received_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 				",
+
 				'pitka_member_program_suggested' => "
 					id mediumint(9) NOT NULL AUTO_INCREMENT,
 					member_id mediumint(9),
 					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 					description varchar(255),
-					penganjur varchar(255),
+					pendek boolean DEFAULT 0,
+					panjang boolean DEFAULT 0,
 					PRIMARY KEY  (id),
 					CONSTRAINT `fk_program_suggested_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
 				",
+
 				'pitka_fee' => "
 					id mediumint(9) NOT NULL AUTO_INCREMENT,
 					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 					description varchar(255),
 					amount decimal(10,2),
-					auto_add boolean,
+					auto_add boolean DEFAULT 0,
 					PRIMARY KEY  (id)
 				",
+
 				'pitka_member_payment' => "
 					id mediumint(9) NOT NULL AUTO_INCREMENT,
 					member_id mediumint(9),
 					fee_id mediumint(9),
 					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
-					paid boolean,
+					paid boolean DEFAULT 0,
 					PRIMARY KEY  (id),
 					CONSTRAINT `fk_payment_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id),
 					CONSTRAINT `fk_payment_fee` FOREIGN KEY (fee_id) REFERENCES {$wpdb->prefix}pitka_fee (id)
