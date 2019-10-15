@@ -221,31 +221,62 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		 * 
 		 */
 		public function handle_form() {
+			// If the nonce field isn't set, don't do anything.
 			if ( !empty( $_POST['pitka_pendaftaran_nonce'] ) ) {
 				if ( !wp_verify_nonce( $_POST['pitka_pendaftaran_nonce'], 'process_pitka_pendaftaran' ) ) {
 					die( 'You are not authorized to perform this action.' );
 				} else {
 					$member_id = $this->create_member( $_POST );
 
-					$aset_fields = array(
-						'description' => 'aset--description',
-						'sendiri' => 'aset--sendiri',
-					);
-					$this->add_items( 'pitka_member_aset', $member_id, $aset_fields, $_POST );
+					// The second level of the tables array must have indexes that match
+					// both the HTML form field name and the database column for the
+					// corresponding table.
 
-					$permasalahan_fields = array(
-						'description' => 'masalah--description',
-						'diri' => 'masalah--diri',
-						'tanggungan' => 'masalah--tanggungan',
-					);
-					$this->add_items( 'pitka_member_permasalahan', $member_id, $permasalahan_fields, $_POST );
+					/* tables array format:
+						*db_table_name* => array(
+							*form field / column name* => *HTML input name*
+						)
+					*/
+					$tables = array(
+						'pitka_member_aset' => array(
+							'description' => 'aset--description',
+							'sendiri' => 'aset--sendiri',
+						),
 
-					$keperluan_fields = array(
-						'description' => 'keperluan--description',
-						'diri' => 'keperluan--diri',
-						'tanggungan' => 'keperluan--tanggungan',
+						'pitka_member_permasalahan' => array(
+							'description' => 'masalah--description',
+							'diri' => 'masalah--diri',
+							'tanggungan' => 'masalah--tanggungan',
+						),
+
+						'pitka_member_keperluan' => array(
+							'description' => 'keperluan--description',
+							'diri' => 'keperluan--diri',
+							'tanggungan' => 'keperluan--tanggungan',
+						),
+
+						'pitka_member_bantuan' => array(
+							'jenis' => 'bantuan--jenis',
+							'agency' => 'bantuan--agency',
+						),
+
+						'pitka_member_program_received' => array(
+							'description' => 'program-received--description',
+							'penganjur' => 'program-received--penganjur',
+							'penilaian' => 'program-received--penilaian',
+						),
+
+						'pitka_member_program_suggested' => array(
+							'description' => 'program-suggested--description',
+							'penganjur' => 'program-suggested--penganjur',
+							'pendek' => 'program-suggested--pendek',
+							'panjang' => 'program-suggested--panjang',
+						),
 					);
-					$this->add_items( 'pitka_member_keperluan', $member_id, $keperluan_fields, $_POST );
+
+					foreach( $tables as $table_name => $fields ) {
+						$this->add_items( $table_name, $member_id, $fields, $_POST );
+					}
 				}
 			}
 		}
@@ -438,26 +469,32 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$items = array();
 			$item_index = 0;
 
-			// Determine if a form field matches the field's prefix
+			// Determine if a form field is one of the ones we're looking for.
+			// It's a "prefix" because there's a number appended to field names that are
+			// part of lists.
 			$prefix_matches = function( $prefix, $field_name ) {
 				return strncmp( $prefix, $field_name, strlen( $prefix ) ) === 0;
 			};
 
 			// Check through all the form's fields
 			foreach ( $form_data as $field_name => $value ) {
+
 				// Check each required field
 				foreach( $fields as $db_field => $prefix ) {
+
 					// If this is one of our fields, add the value to the items array
 					if ( $prefix_matches( $prefix, $field_name ) ) {
 
 						// If this is the key field, increment the item index...
 						if ( $db_field === array_key_first($fields) ) {
+
 							// ...but only if the current index exists
 							if ( array_key_exists( $item_index, $items ) ) {
 								$item_index = $item_index + 1;
 							}
 						}
 
+						// Add the value to the list of items
 						$items[$item_index][$db_field] = $value;
 					}
 				}
