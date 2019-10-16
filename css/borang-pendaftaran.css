@@ -174,16 +174,24 @@
 }
 
 .pitka-fees-current,
-.pitka-fees-form {
+.pitka-fees--form {
   flex: calc(50% - 13px);
 }
 
-.pitka-fees-form label {
+.pitka-fees--form label {
   display: inline-block;
   text-align: right;
   width: 8em;
   margin: 0.25em 0.5em;
   box-sizing: border-box;
+}
+
+.pitka-fees--form input {
+  margin: 0.25em 0.5em;
+}
+
+.pitka-fees--form .amount input {
+  text-align: right;
 }
 
 .pitka-fees-current table {

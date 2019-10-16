@@ -58,20 +58,20 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
 		</table>
 	</div>
 	<div class="pitka-fees-separator"></div>
-  <form class="pitka-fees-form" action="#" method="post">
+  <form class="pitka-fees--form" action="#" method="post">
 		<h2>Add a New Fee</h2>
-    <div class="field">
+    <div class="field description">
       <label for="description">Description:</label>
       <input name="description" id="description" required>
     </div>
 
-    <div class="field">
+    <div class="field amount">
       <label for="amount">Amount:</label>
       <input name="amount" id="amount" type="text"
         data-type="currency" placeholder="100.00" required>
     </div>
 
-    <div class="field">
+    <div class="field automatic">
       <label for="auto_add">Automatic:</label>
       <input type="checkbox" name="auto_add" id="auto_add">
       <p class="comment">
@@ -80,7 +80,7 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
       </p>
     </div>
 
-    <div class="field">
+    <div class="field recurrence">
       <label for="recurrence">Recurrence:</label>
       <select name="recurrence" id="recurrence">
         <option value="none">None</option>
@@ -90,7 +90,7 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
       </select>
       <p class="comment">Recurrence feature is not yet implemented.</p>
     </div>
-    <div class="field">
+    <div>
       <button type="submit" name="action" value="add-new">Add New Fee</button>
     </div>
   </form>
