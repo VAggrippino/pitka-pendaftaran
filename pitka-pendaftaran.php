@@ -102,16 +102,6 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			);
 			add_action( 'load-' . $unpaid_submenu, array( $this, 'enqueue' ) );
 
-			$new_submenu = add_submenu_page(
-				'pitka-membership',
-				'New Members',
-				'New Members',
-				'manage_options',
-				'pitka-membership-new',
-				array( $this, 'show_new_members' )
-			);
-			add_action( 'load-' . $new_submenu, array( $this, 'enqueue' ) );
-
 			$tools_submenu = add_submenu_page(
 				'pitka-membership',
 				'Membership Tools',
@@ -151,11 +141,6 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		public function show_unpaid_members() {
 			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-unpaid.php' );
-		}
-
-		public function show_new_members() {
-			$this->enqueue();
-			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-new.php' );
 		}
 
 		public function show_membership_settings() {
