@@ -28,7 +28,7 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
 	<h1>PITKA Membership Fees</h1>
   <div class="pitka-fees-current">
 		<h2>Current Fees</h2>
-    <table>
+    <table class="pitka-fees--table">
       <tr>
         <th>Description</th>
         <th>Amount</th>
@@ -42,23 +42,23 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
 			}
 			foreach ( $fees as $fee ) {
 				echo "<tr>";
-				echo "<td>{$fee->description}</td>";
-				echo "<td>{$fee->amount}</td>";
+				echo "<td class='pitka-fees--description'>{$fee->description}</td>";
+				echo "<td class='pitka-fees--amount'>{$fee->amount}</td>";
 
-				echo "<td><input type='checkbox' disabled ";
+				echo "<td class='pitka-fees--automatic'><input type='checkbox' disabled ";
 				if ( '1' === $fee->auto_add ) {
 					echo "checked";
 				}
         echo "></td>";
 
-        echo "<td>{$fee->create_date}</td>";
-        echo "<td>{$fee->update_date}</td>";
+        echo "<td class='pitka-fees--create_date'>{$fee->create_date}</td>";
+        echo "<td class='pitka-fees--update_date'>{$fee->update_date}</td>";
 			}
 			?>
 		</table>
 	</div>
 	<div class="pitka-fees-separator"></div>
-  <form class="pitka-fees-form pitka-form" action="#" method="post">
+  <form class="pitka-fees-form" action="#" method="post">
 		<h2>Add a New Fee</h2>
     <div class="field">
       <label for="description">Description:</label>
@@ -72,8 +72,8 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
     </div>
 
     <div class="field">
-      <input type="checkbox" name="auto_add" id="auto_add">
       <label for="auto_add">Automatic:</label>
+      <input type="checkbox" name="auto_add" id="auto_add">
       <p class="comment">
         Fees marked as <em>automatic</em> will be automatically assigned to new
         members.
@@ -82,13 +82,13 @@ $fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
 
     <div class="field">
       <label for="recurrence">Recurrence:</label>
-      <select name="recurrence" id="recurrence" disabled>
+      <select name="recurrence" id="recurrence">
         <option value="none">None</option>
         <option value="weekly">Weekly</option>
         <option value="monthly">Monthly</option>
         <option value="yearly">Yearly</option>
       </select>
-      <p class="comment">This feature is not yet implemented.</p>
+      <p class="comment">Recurrence feature is not yet implemented.</p>
     </div>
     <div class="field">
       <button type="submit" name="action" value="add-new">Add New Fee</button>

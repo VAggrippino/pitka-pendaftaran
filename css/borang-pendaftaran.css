@@ -178,6 +178,14 @@
   flex: calc(50% - 13px);
 }
 
+.pitka-fees-form label {
+  display: inline-block;
+  text-align: right;
+  width: 8em;
+  margin: 0.25em 0.5em;
+  box-sizing: border-box;
+}
+
 .pitka-fees-current table {
   border-collapse: collapse;
   width: 100%;
@@ -196,6 +204,23 @@
   border-style: solid;
   border-color: silver;
   border-width: 0 0 6px 0;
+}
+
+.pitka-fees--table td {
+  padding: 0.25em 0.5em;
+}
+
+.pitka-fees--amount {
+  text-align: right;
+}
+
+.pitka-fees--automatic {
+  text-align: center;
+}
+
+.pitka-fees--create_date,
+.pitka-fees--update_date {
+  text-align: center;
 }
 
 @media screen and (min-width: 42rem) {
