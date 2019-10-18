@@ -287,11 +287,11 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					alamat_pekerja varchar(255),
 					tingkat_pendapatan varchar(10),
 					faktor_menjadi_ibu_tunggal varchar(20),
-					bilangan_tanggungan tinyint,
-					bilangan_anak_bersekolah tinyint,
-					bilangan_anak_bekerja tinyint,
+					bilangan_tanggungan tinyint DEFAULT 0,
+					bilangan_anak_bersekolah tinyint DEFAULT 0,
+					bilangan_anak_bekerja tinyint DEFAULT 0,
 					pekerjaan_anak varchar(255),
-					bilangan_anak_menganggur tinyint,
+					bilangan_anak_menganggur tinyint DEFAULT 0,
 					PRIMARY KEY  (id)
 				",
 
