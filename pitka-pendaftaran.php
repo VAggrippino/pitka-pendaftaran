@@ -51,7 +51,7 @@ if ( !function_exists( 'add_action' ) ) {
 
 if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 	class PITKA_Borang_Pendaftaran {
-		var $pitka_pendaftaran_db_version = '1.0.0';
+		var $pitka_pendaftaran_db_version = '1';
 
 		public function __construct() {
 			// Handle a Pendaftaran form submission after WP page init
@@ -61,6 +61,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'register_styles' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'register_scripts' ) );
+			add_action( 'plugins_loaded', array( $this, 'upgrade_database' ) );
 
 			add_shortcode( 'PITKA-Borang-Pendaftaran', array( $this, 'shortcode' ) );
 
@@ -257,10 +258,26 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$table = $wpdb->prefix . $table_name;
 			$charset_collate = $wpdb->get_charset_collate();
 
-			error_log( "Creating '$table' table..." );
+			/*
 			$result = $wpdb->query( "CREATE TABLE $table ( $fields ) $charset_collate;" );
 			if ( false === $result ) {
 				die( "Error while attempting to create '{$table}' table.\n{$wpdb->last_error}" );
+			}
+			*/
+			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+			$result = dbDelta( "CREATE TABLE $table ( $fields ) $charset_collate;" );
+			$success = $wpdb->last_error;
+			return $success;
+		}
+
+		/**
+		 * Start the database upgrade if this version is newer than the currently
+		 * implemented version.
+		 */
+		public function upgrade_database() {
+			$installed_db_version = get_option( 'pitka_pendaftaran_db_version' );
+			if ( !$installed_db_version || $installed_db_version < $this->pitka_pendaftaran_db_version ) {
+				$this->create_tables();
 			}
 		}
 
@@ -287,11 +304,12 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					alamat_pekerja varchar(255),
 					tingkat_pendapatan varchar(10),
 					faktor_menjadi_ibu_tunggal varchar(20),
-					bilangan_tanggungan tinyint DEFAULT 0,
-					bilangan_anak_bersekolah tinyint DEFAULT 0,
-					bilangan_anak_bekerja tinyint DEFAULT 0,
+					faktor_tahun int(4),
+					bilangan_tanggungan tinyint(2) DEFAULT 0,
+					bilangan_anak_bersekolah tinyint(2) DEFAULT 0,
+					bilangan_anak_bekerja tinyint(2) DEFAULT 0,
 					pekerjaan_anak varchar(255),
-					bilangan_anak_menganggur tinyint DEFAULT 0,
+					bilangan_anak_menganggur tinyint(2) DEFAULT 0,
 					PRIMARY KEY  (id)
 				",
 
@@ -302,8 +320,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 					description varchar(255),
 					sendiri boolean DEFAULT 0,
-					PRIMARY KEY  (id),
-					CONSTRAINT `fk_aset_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+					PRIMARY KEY  (id)
 				",
 
 				'pitka_member_permasalahan' => "
@@ -314,8 +331,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					description varchar(255),
 					diri boolean DEFAULT 0,
 					tanggungan boolean DEFAULT 0,
-					PRIMARY KEY  (id),
-					CONSTRAINT `fk_permasalahan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+					PRIMARY KEY  (id)
 				",
 
 				'pitka_member_keperluan' => "
@@ -326,8 +342,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					description varchar(255),
 					diri boolean DEFAULT 0,
 					tanggungan boolean DEFAULT 0,
-					PRIMARY KEY  (id),
-					CONSTRAINT `fk_keperluan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+					PRIMARY KEY  (id)
 				",
 
 				'pitka_member_bantuan' => "
@@ -337,8 +352,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 					jenis varchar(255),
 					agency varchar(255),
-					PRIMARY KEY  (id),
-					CONSTRAINT `fk_bantuan_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+					PRIMARY KEY  (id)
 				",
 
 				'pitka_member_program_received' => "
@@ -349,8 +363,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					description varchar(255),
 					penganjur varchar(255),
 					penilaian tinyint(1),
-					PRIMARY KEY  (id),
-					CONSTRAINT `fk_program_received_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+					PRIMARY KEY  (id)
 				",
 
 				'pitka_member_program_suggested' => "
@@ -361,8 +374,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					description varchar(255),
 					pendek boolean DEFAULT 0,
 					panjang boolean DEFAULT 0,
-					PRIMARY KEY  (id),
-					CONSTRAINT `fk_program_suggested_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id)
+					PRIMARY KEY  (id)
 				",
 
 				'pitka_fee' => "
@@ -382,9 +394,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 					create_date timestamp DEFAULT '0000-00-00 00:00:00' NOT NULL,
 					update_date timestamp DEFAULT CURRENT_TIMESTAMP,
 					paid boolean DEFAULT 0,
-					PRIMARY KEY  (id),
-					CONSTRAINT `fk_payment_member` FOREIGN KEY (member_id) REFERENCES {$wpdb->prefix}pitka_member (id),
-					CONSTRAINT `fk_payment_fee` FOREIGN KEY (fee_id) REFERENCES {$wpdb->prefix}pitka_fee (id)
+					PRIMARY KEY  (id)
 				",
 			);
 
@@ -392,8 +402,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				$this->create_pitka_table( $table_name, $fields );
 			}
 
-			$installed_db_version = get_option( 'pitka_pendaftaran_db_version' );
-			//update_option( 'pitka_pendaftaran_db_version', $this->pitka_pendaftaran_db_version );
+			update_option( 'pitka_pendaftaran_db_version', $this->pitka_pendaftaran_db_version );
 		}
 
 		/**
