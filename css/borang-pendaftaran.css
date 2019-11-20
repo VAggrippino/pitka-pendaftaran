@@ -44,8 +44,7 @@
 }
 
 .pitka-form .field input,
-.pitka-form .field select,
-.pitka-form .field textarea {
+.pitka-form .field select {
   height: 2rem;
   padding: 0.25rem 0.75rem;
   width: 100%;
