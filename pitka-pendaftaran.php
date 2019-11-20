@@ -420,6 +420,10 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				$member_data['faktor_menjadi_ibu_tunggal'] = $member_data['faktor_other'];
 			}
 
+			if ( $member_data['bangsa'] === 'other' ) {
+				$member_data['bangsa'] = $member_data['bangsa_other'];
+			}
+
 			global $wpdb;
 			$result = $wpdb->insert( "{$wpdb->prefix}pitka_member", array(
 				'create_date' => current_time( 'mysql', 0 ),
