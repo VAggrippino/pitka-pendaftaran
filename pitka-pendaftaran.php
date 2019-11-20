@@ -424,6 +424,10 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				$member_data['bangsa'] = $member_data['bangsa_other'];
 			}
 
+			if ( $member_data['agama'] === 'other' ) {
+				$member_data['agama'] = $member_data['agama_other'];
+			}
+
 			global $wpdb;
 			$result = $wpdb->insert( "{$wpdb->prefix}pitka_member", array(
 				'create_date' => current_time( 'mysql', 0 ),
