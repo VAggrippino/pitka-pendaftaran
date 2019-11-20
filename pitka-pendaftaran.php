@@ -435,6 +435,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				'alamat_pekerja' => $member_data['alamat_pekerja'],
 				'tingkat_pendapatan' => $member_data['tingkat_pendapatan'],
 				'faktor_menjadi_ibu_tunggal' => $member_data['faktor_menjadi_ibu_tunggal'],
+				'faktor_tahun' => $member_data['faktor_tahun'],
 				'bilangan_tanggungan' => $member_data['bilangan_tanggungan'],
 				'bilangan_anak_bersekolah' => $member_data['bilangan_anak_bersekolah'],
 				'bilangan_anak_bekerja' => $member_data['bilangan_anak_bekerja'],

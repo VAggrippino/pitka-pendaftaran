@@ -281,43 +281,51 @@
 				</div>
 			</li>
 							
-			<li class="pitka-bp--question newpage">
-				<div class="field">
-					<label for="faktor_menjadi_ibu_tunggal">Faktor Menjadi Ibu Tunggal:</label>
-					<select
-						class="noprint"
-						name="faktor_menjadi_ibu_tunggal"
-						id="faktor_menjadi_ibu_tunggal"
-						onchange="showOtherField(this, `other`, `field--faktor--other`)"
-					>
-						<option value="">-- Sila Pilih Satu --</option>
-						<option value="Kematian Suami">Kematian Suami</option>
-						<option value="Perceraian">Perceraian</option>
-						<option value="other">Lain-lain (sila nyatakan)</option>
-					</select>
+			<li class="pitka-bp--question pitka-bp--question--faktor newpage">
+				<div class="grid">
+					<div class="field">
+						<label for="faktor_menjadi_ibu_tunggal">Faktor Menjadi Ibu Tunggal:</label>
+						<select
+							class="noprint"
+							name="faktor_menjadi_ibu_tunggal"
+							id="faktor_menjadi_ibu_tunggal"
+							onchange="showOtherField(this, `other`, `field--faktor--other`)"
+						>
+							<option value="">-- Sila Pilih Satu --</option>
+							<option value="Kematian Suami">Kematian Suami</option>
+							<option value="Perceraian">Perceraian</option>
+							<option value="other">Lain-lain (sila nyatakan)</option>
+						</select>
 
-					<div class="onlyprint faktor">
-						<table>
-							<tr>
-								<td>Kematian Suami</td>
-								<td><div class="fake-checkbox"></div></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Perceraian</td>
-								<td><div class="fake-checkbox"></div></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Lain-lain<br>(sila nyatakan)</td>
-								<td><div class="fake-checkbox"></div></td>
-								<td><input type="text"></td>
-							</tr>
-						</table>
+						<div class="onlyprint faktor">
+							<table>
+								<tr>
+									<td>Kematian Suami</td>
+									<td><div class="fake-checkbox"></div></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Perceraian</td>
+									<td><div class="fake-checkbox"></div></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Lain-lain<br>(sila nyatakan)</td>
+									<td><div class="fake-checkbox"></div></td>
+									<td><input type="text"></td>
+								</tr>
+							</table>
+						</div>
 					</div>
-				</div>
-				<div class="field hidden" id="field--faktor--other">
-					<input type="text" name="faktor-other" disabled>
+
+					<div class="field inline">
+						<label for="faktor_tahun">Tahun: </label>
+						<input type="number" min="1900" name="faktor_tahun" id="faktor_tahun">
+					</div>
+
+					<div class="field hidden" id="field--faktor--other">
+						<input type="text" name="faktor-other" disabled>
+					</div>
 				</div>
 			</li>
 
@@ -376,29 +384,21 @@
 					<li>
 						<div class="field">
 							<label for="bilangan_tanggungan">Bilangan Tanggungan:</label>
-							<input type="number" name="bilangan_tanggungan" id="bilangan_tanggungan">
+							<input type="number" min="0" name="bilangan_tanggungan" id="bilangan_tanggungan">
 						</div>
 					</li>
 						
 					<li>
 						<div class="field">
 							<label for="bilangan_anak_bersekolah">Bilangan Anak Bersekolah:</label>
-							<input
-								type="number"
-								name="bilangan_anak_bersekolah"
-								id="bilangan_anak_bersekolah"
-							>
+							<input type="number" min="0" name="bilangan_anak_bersekolah" id="bilangan_anak_bersekolah">
 						</div>
 					</li>
 						
 					<li>
 						<div class="field">
 							<label for="bilangan_anak_bekerja">Bilangan Anak Bekerja:</label>
-							<input
-								type="number"
-								name="bilangan_anak_bekerja"
-								id="bilangan_anak_bekerja"
-							>
+							<input type="number" min="0" name="bilangan_anak_bekerja" id="bilangan_anak_bekerja">
 						</div>
 					</li>
 			
@@ -412,11 +412,7 @@
 					<li>
 						<div class="field">
 							<label for="bilangan_anak_menganggur">Bilangan Anak Menganggur:</label>
-							<input
-								type="number"
-								name="bilangan_anak_menganggur"
-								id="bilangan_anak_menganggur"
-							>
+							<input type="number" min="0" name="bilangan_anak_menganggur" id="bilangan_anak_menganggur">
 						</div>
 					</li>
 				</ol>

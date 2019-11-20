@@ -22,6 +22,20 @@
     margin var(--tspeed);
 }
 
+.pitka-form .field input:invalid {
+  background-color: lightyellow;
+}
+
+.pitka-form .field.inline {
+  display: flex;
+  align-items: flex-end;
+}
+
+.pitka-form .field.inline label {
+  flex: 0 0 auto;
+  margin: 0 0.75em;
+}
+
 .pitka-form .field.hidden {
   max-width: 0;
   max-height: 0;
@@ -263,6 +277,11 @@
     grid-gap: 2em;
   }
 
+  .pitka-bp--question--faktor > .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .pitka-fees {
     flex-direction: row;
   }
@@ -336,6 +355,10 @@
 
   .pitka-form .field input {
     height: var(--field-height);
+  }
+
+  .pitka-form .field.inline input {
+    width: auto;
   }
 
   /*
