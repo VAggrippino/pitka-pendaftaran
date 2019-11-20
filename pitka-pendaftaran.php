@@ -414,7 +414,11 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		 */
 		private function create_member( $member_data ) {
 			debug_show( "MEMBER DATA:" );
-			debug_dump($member_data);
+			debug_dump( $member_data );
+
+			if ( $member_data['faktor_menjadi_ibu_tunggal'] === 'other' ) {
+				$member_data['faktor_menjadi_ibu_tunggal'] = $member_data['faktor_other'];
+			}
 
 			global $wpdb;
 			$result = $wpdb->insert( "{$wpdb->prefix}pitka_member", array(
