@@ -171,6 +171,7 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			if ( $is_form_submitted ) {
 				$response = file_get_contents( plugins_url( 'form_submission_response.html', __FILE__ ) );
 				$response = str_replace( '{{__HOME_URL__}}', get_home_url(), $response );
+				$response = str_replace( '{{__APPLICANT_NAME__}}', $_POST['nama'], $response );
 				return $response;
 			} else {
 				$this->enqueue();
