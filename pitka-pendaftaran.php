@@ -28,20 +28,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-function debug_dump( $data ) {
-	$local_addresses = array( '127.0.0.1', '::1' );
-	if ( in_array( $_SERVER['REMOTE_ADDR'] , array( '127.0.0.1', '::1' ) ) ) {
-		echo "<textarea style='width: 100%; height: 30rem;'>";
-		var_dump( $data );
-		echo "</textarea>";
-	}
-}
-
-function debug_show( $line ) {
-	if ( in_array( $_SERVER['REMOTE_ADDR'] , array( '127.0.0.1', '::1' ) ) ) {
-		echo "<p>$line</p>";
-	}
-}
+require_once('./debug_helpers.php');
 
 // Make sure we don't expose any info if called directly
 if ( !function_exists( 'add_action' ) ) {
