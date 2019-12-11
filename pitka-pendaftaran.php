@@ -183,31 +183,6 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		}
 
 		/**
-		 * Show form submission response.
-		 */
-		private function show_submission_response( $member_name ) {
-			?>
-			<div class="submission-response">
-				<h1 class="submission-response--title">Terima Kasih!</h1>
-				<div class="submission-response--message">
-					<p>
-						Terima kasih kerana permohonan anda, <?php echo $member_name ?>!
-					</p>
-					<p>
-						Kami telah menerima maklumat anda dan kami akan membuat susulan
-						dengan anda tidak lama lagi.
-					</p>
-					<p>
-						Jangan lupa! Untuk melengkapkan proses pendaftaran dan menjadi
-						ahli PITKA, anda perlu membayar yuran masuk sebanyak RM10.00 dan
-						yuran keahlian tahun pertama anda sebanyak RM5.00.
-					</p>
-				</div>
-				<button class="submission-response--action" onclick="location.href = <?php get_home_url() ?>;">Return Home</button> </div>
-			<?php
-		}
-
-		/**
 		 * Handle PITKA Pendaftaran form submission.
 		 * 
 		 * 1. Check the WordPress generated nonce
@@ -276,8 +251,6 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				foreach( $tables as $table_name => $fields ) {
 					$this->add_items( $table_name, $member_id, $fields, $_POST );
 				}
-
-				$this->show_submission_response( $_POST['nama'] );
 			}
 		}
 
