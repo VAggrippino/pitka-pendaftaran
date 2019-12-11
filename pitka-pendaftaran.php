@@ -28,7 +28,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-require_once('./debug_helpers.php');
+require( plugin_dir_path( __FILE__ ) . 'debug_helpers.php' );
 
 // Make sure we don't expose any info if called directly
 if ( !function_exists( 'add_action' ) ) {
@@ -162,11 +162,48 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		 *  @return string The full HTML of the pendaftaran form.
 		 */
 		public function shortcode() {
-			$this->enqueue();
-			$nonce_field = wp_nonce_field( 'process_pitka_pendaftaran', 'pitka_pendaftaran_nonce', false );
-			$pitka_bp_form = file_get_contents( plugins_url( 'form.html', __FILE__ ) );
-			$pitka_bp_form = str_replace( '{{__NONCE_FIELD__}}', $nonce_field, $pitka_bp_form );
-			return $pitka_bp_form;
+			$is_nonce = !empty( $_POST['pitka_pendaftaran_nonce'] );
+			$is_valid_nonce = function() {
+				return wp_verify_nonce( $_POST['pitka_pendaftaran_nonce'], 'process_pitka_pendaftaran' );
+			};
+			$is_form_submitted = $is_nonce && $is_valid_nonce();
+
+			if ( $is_form_submitted ) {
+				$response = file_get_contents( plugins_url( 'form_submission_response.html', __FILE__ ) );
+				$response = str_replace( '{{__HOME_URL__}}', get_home_url(), $response );
+				return $response;
+			} else {
+				$this->enqueue();
+				$nonce_field = wp_nonce_field( 'process_pitka_pendaftaran', 'pitka_pendaftaran_nonce', false );
+				$pitka_bp_form = file_get_contents( plugins_url( 'form.html', __FILE__ ) );
+				$pitka_bp_form = str_replace( '{{__NONCE_FIELD__}}', $nonce_field, $pitka_bp_form );
+				return $pitka_bp_form;
+			}
+		}
+
+		/**
+		 * Show form submission response.
+		 */
+		private function show_submission_response( $member_name ) {
+			?>
+			<div class="submission-response">
+				<h1 class="submission-response--title">Terima Kasih!</h1>
+				<div class="submission-response--message">
+					<p>
+						Terima kasih kerana permohonan anda, <?php echo $member_name ?>!
+					</p>
+					<p>
+						Kami telah menerima maklumat anda dan kami akan membuat susulan
+						dengan anda tidak lama lagi.
+					</p>
+					<p>
+						Jangan lupa! Untuk melengkapkan proses pendaftaran dan menjadi
+						ahli PITKA, anda perlu membayar yuran masuk sebanyak RM10.00 dan
+						yuran keahlian tahun pertama anda sebanyak RM5.00.
+					</p>
+				</div>
+				<button class="submission-response--action" onclick="location.href = <?php get_home_url() ?>;">Return Home</button> </div>
+			<?php
 		}
 
 		/**
@@ -179,63 +216,67 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		 * 
 		 */
 		public function handle_form() {
+			$is_nonce = !empty( $_POST['pitka_pendaftaran_nonce'] );
+			$is_valid_nonce = function() {
+				return wp_verify_nonce( $_POST['pitka_pendaftaran_nonce'], 'process_pitka_pendaftaran' );
+			};
+			$is_form_submitted = $is_nonce && $is_valid_nonce();
+
 			// If the nonce field isn't set, don't do anything.
-			if ( !empty( $_POST['pitka_pendaftaran_nonce'] ) ) {
-				if ( !wp_verify_nonce( $_POST['pitka_pendaftaran_nonce'], 'process_pitka_pendaftaran' ) ) {
-					die( 'You are not authorized to perform this action.' );
-				} else {
-					$member_id = $this->create_member( $_POST );
+			if ( $is_form_submitted ) {
+				$member_id = $this->create_member( $_POST );
 
-					// The second level of the tables array must have indexes that match
-					// both the HTML form field name and the database column for the
-					// corresponding table.
+				// The second level of the tables array must have indexes that match
+				// both the HTML form field name and the database column for the
+				// corresponding table.
 
-					/* tables array format:
-						*db_table_name* => array(
-							*form field / column name* => *HTML input name*
-						)
-					*/
-					$tables = array(
-						'pitka_member_aset' => array(
-							'description' => 'aset--description',
-							'sendiri' => 'aset--sendiri',
-						),
+				/* tables array format:
+					*db_table_name* => array(
+						*form field / column name* => *HTML input name*
+					)
+				*/
+				$tables = array(
+					'pitka_member_aset' => array(
+						'description' => 'aset--description',
+						'sendiri' => 'aset--sendiri',
+					),
 
-						'pitka_member_permasalahan' => array(
-							'description' => 'masalah--description',
-							'diri' => 'masalah--diri',
-							'tanggungan' => 'masalah--tanggungan',
-						),
+					'pitka_member_permasalahan' => array(
+						'description' => 'masalah--description',
+						'diri' => 'masalah--diri',
+						'tanggungan' => 'masalah--tanggungan',
+					),
 
-						'pitka_member_keperluan' => array(
-							'description' => 'keperluan--description',
-							'diri' => 'keperluan--diri',
-							'tanggungan' => 'keperluan--tanggungan',
-						),
+					'pitka_member_keperluan' => array(
+						'description' => 'keperluan--description',
+						'diri' => 'keperluan--diri',
+						'tanggungan' => 'keperluan--tanggungan',
+					),
 
-						'pitka_member_bantuan' => array(
-							'jenis' => 'bantuan--jenis',
-							'agency' => 'bantuan--agency',
-						),
+					'pitka_member_bantuan' => array(
+						'jenis' => 'bantuan--jenis',
+						'agency' => 'bantuan--agency',
+					),
 
-						'pitka_member_program_received' => array(
-							'description' => 'program-received--description',
-							'penganjur' => 'program-received--penganjur',
-							'penilaian' => 'program-received--penilaian',
-						),
+					'pitka_member_program_received' => array(
+						'description' => 'program-received--description',
+						'penganjur' => 'program-received--penganjur',
+						'penilaian' => 'program-received--penilaian',
+					),
 
-						'pitka_member_program_suggested' => array(
-							'description' => 'program-suggested--description',
-							'penganjur' => 'program-suggested--penganjur',
-							'pendek' => 'program-suggested--pendek',
-							'panjang' => 'program-suggested--panjang',
-						),
-					);
+					'pitka_member_program_suggested' => array(
+						'description' => 'program-suggested--description',
+						'penganjur' => 'program-suggested--penganjur',
+						'pendek' => 'program-suggested--pendek',
+						'panjang' => 'program-suggested--panjang',
+					),
+				);
 
-					foreach( $tables as $table_name => $fields ) {
-						$this->add_items( $table_name, $member_id, $fields, $_POST );
-					}
+				foreach( $tables as $table_name => $fields ) {
+					$this->add_items( $table_name, $member_id, $fields, $_POST );
 				}
+
+				$this->show_submission_response( $_POST['nama'] );
 			}
 		}
 
