@@ -36,7 +36,7 @@ foreach ( $members as $member ) {
     }
   }
 
-  $umur = $umur . ' <i class="fas fa-birthday-cake"></i>';
+  $umur = $umur;
 
   echo "<tr>";
   echo "<td>{$member->nama}</td>";
