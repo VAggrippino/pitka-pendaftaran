@@ -22,7 +22,7 @@ if ( isset( $_POST['action'] ) && 'add-new' === $_POST['action'] ) {
   ), $field_types );
 }
 
-$fees = $wpdb->get_results("SELECT * from {$wpdb->prefix}pitka_fee", OBJECT);
+$fees = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}pitka_fee", OBJECT);
 ?>
 <div class="pitka-fees">
 	<h1>PITKA Membership Fees</h1>
