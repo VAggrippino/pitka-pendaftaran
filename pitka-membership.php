@@ -9,7 +9,6 @@ $members = $wpdb->get_results( "SELECT * from {$wpdb->prefix}pitka_member" );
     <th>Nama</th>
     <th>Umur</th>
     <th>Agama</th>
-    <th>Tingkat Pendapatan</th>
     <th>Dikemaskinikan</th>
   </tr>
 <?php
@@ -42,7 +41,6 @@ foreach ( $members as $member ) {
   echo "<td>{$member->nama}</td>";
   echo "<td>{$umur}</td>";
   echo "<td>{$member->agama}</td>";
-  echo "<td>{$member->tingkat_pendapatan}</td>";
   echo "<td>{$member->update_date}</td>";
   echo "</tr>";
 }
