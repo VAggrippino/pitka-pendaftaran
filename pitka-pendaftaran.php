@@ -275,12 +275,6 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 			$table = $wpdb->prefix . $table_name;
 			$charset_collate = $wpdb->get_charset_collate();
 
-			/*
-			$result = $wpdb->query( "CREATE TABLE $table ( $fields ) $charset_collate;" );
-			if ( false === $result ) {
-				die( "Error while attempting to create '{$table}' table.\n{$wpdb->last_error}" );
-			}
-			*/
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 			$result = dbDelta( "CREATE TABLE $table ( $fields ) $charset_collate;" );
 			$success = $wpdb->last_error;
