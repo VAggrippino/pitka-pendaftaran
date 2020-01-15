@@ -13,11 +13,14 @@ $members = $wpdb->get_results( "SELECT * from {$wpdb->prefix}pitka_member" );
 			placeholder="Nama / IC">
 	</div>
 	<table class="pitka-membership--table">
-		<tr>
-			<th>Nama</th>
-			<th>Kad Pengenalan Baru</th>
-			<th>Dikemaskinikan</th>
-		</tr>
+		<thead>
+			<tr>
+				<th>Nama</th>
+				<th>Kad Pengenalan Baru</th>
+				<th>Dikemaskinikan</th>
+			</tr>
+		</thead>
+		<tbody>
 	<?php
 	foreach ( $members as $member ) {
 		$birthdate = explode( '-', $member->tarikh_lahir );
@@ -51,5 +54,6 @@ $members = $wpdb->get_results( "SELECT * from {$wpdb->prefix}pitka_member" );
 		echo "</tr>";
 	}
 	?>
+	</tbody>
 	</table>
 </div>

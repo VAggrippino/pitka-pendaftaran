@@ -133,12 +133,12 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		public function register_styles() {
 			wp_register_style( 'borang-pendaftaran-style', plugins_url( 'css/borang-pendaftaran.css', __FILE__ ) );
-			wp_register_style( 'membership-tools-style', plugins_url( 'css/membership-tools.css', __FILE__ ) );
+			wp_register_style( 'pitka-membership-style', plugins_url( 'css/pitka-membership.css', __FILE__ ) );
 		}
 
 		public function register_scripts() {
 			wp_register_script( 'borang-pendaftaran-script', plugins_url( 'js/borang-pendaftaran.js', __FILE__ ) );
-			wp_register_script( 'membership-tools-script', plugins_url( 'js/membership-tools.js', __FILE__ ) );
+			wp_register_script( 'pitka-membership-script', plugins_url( 'js/pitka-membership.js', __FILE__ ) );
 			wp_register_script( 'autoExpandTextarea-script', plugins_url( 'js/autoExpandTextarea.js', __FILE__ ) );
 			wp_register_script( 'autoFormatCurrency-script', plugins_url( 'js/autoFormatCurrency.js', __FILE__ ) );
 			wp_register_script( 'printFriendlyCheckboxes-script', plugins_url( 'js/printFriendlyCheckboxes.js', __FILE__ ) );
@@ -147,11 +147,11 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 
 		public function enqueue() {
 			wp_enqueue_style('borang-pendaftaran-style');
-			wp_enqueue_style('membership-tools-style');
+			wp_enqueue_style('pitka-membership-style');
 			wp_enqueue_script('borang-pendaftaran-script');
 			wp_enqueue_script('autoExpandTextarea-script');
 			wp_enqueue_script('autoFormatCurrency-script');
-			wp_enqueue_script('membership-tools-script');
+			wp_enqueue_script('pitka-membership-script');
 			wp_enqueue_script('printFriendlyCheckboxes-script');
 			wp_enqueue_script('fontawesome');
 		}

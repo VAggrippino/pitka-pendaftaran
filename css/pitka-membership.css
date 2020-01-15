@@ -2,3 +2,22 @@
   height: 0;
   overflow: hidden;
 }
+
+.pitka-membership--table tbody tr {
+  background-color: snow;
+  transition: background-color 250ms;
+  cursor: default;
+  line-height: 1.5em;
+}
+
+.pitka-membership--table tbody td {
+  padding: 0.25em 0.5em;
+}
+
+.pitka-membership--table tbody tr:nth-child(odd) {
+  background-color: whitesmoke;
+}
+
+.pitka-membership--table tbody tr:hover {
+  background-color: lightgoldenrodyellow;
+}
