@@ -109,16 +109,6 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 				array( $this, 'show_membership_fees' )
 			);
 			add_action( 'load-' . $fees_submenu, array( $this, 'enqueue' ) );
-
-			$search_submenu = add_submenu_page(
-				'pitka-membership',
-				'Member Search',
-				'Member Search',
-				'manage_options',
-				'pitka-membership-search',
-				array( $this, 'show_membership_search' )
-			);
-			add_action( 'load-' . $search_submenu, array( $this, 'enqueue' ) );
 		}
 
 		public function show_members() {
@@ -139,11 +129,6 @@ if ( !class_exists( 'PITKA_Borang_Pendaftaran' ) ) {
 		public function show_membership_fees() {
 			$this->enqueue();
 			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-fees.php' );
-		}
-
-		public function show_membership_search() {
-			$this->enqueue();
-			require( plugin_dir_path( __FILE__ ) . 'pitka-membership-search.php' );
 		}
 
 		public function register_styles() {
